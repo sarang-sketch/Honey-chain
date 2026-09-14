@@ -20,7 +20,7 @@
     if (!container) {
       container = document.createElement('div');
       container.id = 'honey-toast-container';
-      container.className = 'fixed top-5 right-5 z-[9999] flex flex-col gap-2 pointer-events-none';
+      container.className = 'fixed top-3 sm:top-5 right-3 sm:right-5 left-3 sm:left-auto max-w-sm z-[9999] flex flex-col gap-2 pointer-events-none';
       document.body.appendChild(container);
     }
 
@@ -313,11 +313,11 @@
 
     dropdown = document.createElement('div');
     dropdown.id = 'header-role-dropdown';
-    dropdown.className = 'fixed bg-surface-container-lowest rounded-xl shadow-2xl border border-surface-variant p-2 w-72 z-50 flex flex-col gap-1';
+    dropdown.className = 'fixed bg-surface-container-lowest rounded-xl shadow-2xl border border-surface-variant p-2 w-72 max-w-[calc(100vw-24px)] z-50 flex flex-col gap-1';
 
     const rect = anchorEl.getBoundingClientRect();
     dropdown.style.top = `${rect.bottom + 8}px`;
-    dropdown.style.left = `${Math.min(rect.left, window.innerWidth - 300)}px`;
+    dropdown.style.left = `${Math.max(12, Math.min(rect.left, window.innerWidth - 300))}px`;
 
     let html = `
       <div class="px-3 py-2 border-b border-surface-variant text-xs font-semibold text-on-surface-variant uppercase tracking-wider flex justify-between items-center">
@@ -378,7 +378,7 @@
     root.innerHTML = `
       <!-- 1. Quick Verify / QR Scanner Modal -->
       <div id="quick-qr-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4">
-        <div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-lg w-full p-6 border border-surface-variant flex flex-col gap-5 relative">
+        <div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-6 border border-surface-variant flex flex-col gap-4 sm:gap-5 relative max-h-[90vh] overflow-y-auto">
           <button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container" onclick="HoneyModal.close('quick-qr-modal')">
             <span class="material-symbols-outlined">close</span>
           </button>
@@ -576,7 +576,7 @@
       consumer: { bg: 'bg-primary-fixed', text: 'text-primary', border: 'border-primary/30', badge: 'bg-secondary-container text-on-secondary-container' }
     };
 
-    let portalHTML = '<div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-2xl w-full border border-surface-variant relative overflow-hidden">';
+    let portalHTML = '<div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-2xl w-full border border-surface-variant relative max-h-[90vh] flex flex-col overflow-hidden">';
     
     // Header
     portalHTML += '<div class="px-6 pt-6 pb-4 border-b border-surface-variant flex items-center justify-between">';
@@ -588,7 +588,7 @@
     portalHTML += '</div>';
 
     // Role Cards Grid
-    portalHTML += '<div class="p-5 grid gap-3">';
+    portalHTML += '<div class="p-3 sm:p-5 grid gap-2.5 sm:gap-3 overflow-y-auto max-h-[60vh]">';
     
     roleKeys.forEach(key => {
       const role = roles[key];
@@ -658,13 +658,98 @@
     }
   };
 
-  // --- Floating Screen Switcher HUD for Easy Evaluation ---
+  
+  // --- Mobile Sidebar Navigation Drawer ---
+  function initMobileNavigation() {
+    let backdrop = document.getElementById('sidebar-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'sidebar-backdrop';
+      backdrop.className = 'fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden transition-opacity duration-300 opacity-0';
+      document.body.appendChild(backdrop);
+    }
+
+    const sidebar = document.getElementById('app-sidebar') || document.querySelector('aside');
+    if (!sidebar) return;
+
+    if (!sidebar.id) sidebar.id = 'app-sidebar';
+    sidebar.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+
+    // Dynamically inject mobile hamburger button if missing from header
+    const header = document.querySelector('header');
+    if (header && !document.getElementById('mobile-menu-btn')) {
+      const leftCol = header.querySelector('.flex.items-center:first-child');
+      if (leftCol) {
+        const menuBtn = document.createElement('button');
+        menuBtn.id = 'mobile-menu-btn';
+        menuBtn.className = 'lg:hidden p-2 -ml-1 text-on-surface hover:bg-surface-container rounded-lg flex items-center justify-center shrink-0';
+        menuBtn.setAttribute('aria-label', 'Open Navigation');
+        menuBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
+        leftCol.insertBefore(menuBtn, leftCol.firstChild);
+      }
+    }
+
+    // Dynamically inject close button in sidebar top header if missing
+    if (!document.getElementById('sidebar-close-btn')) {
+      const topBar = sidebar.querySelector('.h-16');
+      if (topBar) {
+        topBar.classList.add('justify-between');
+        const closeBtn = document.createElement('button');
+        closeBtn.id = 'sidebar-close-btn';
+        closeBtn.className = 'lg:hidden ml-auto p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors';
+        closeBtn.setAttribute('aria-label', 'Close menu');
+        closeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
+        topBar.appendChild(closeBtn);
+      }
+    }
+
+    const openBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('sidebar-close-btn');
+
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      sidebar.classList.add('translate-x-0');
+      backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+      });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('translate-x-0');
+      sidebar.classList.add('-translate-x-full');
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    backdrop.addEventListener('click', closeSidebar);
+
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024) closeSidebar();
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) closeSidebar();
+    });
+  }
+
+    // --- Floating Screen Switcher HUD for Easy Evaluation ---
   function injectScreenSwitcherHUD() {
     if (document.getElementById('honey-screen-hud')) return;
 
     const hud = document.createElement('div');
     hud.id = 'honey-screen-hud';
-    hud.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-[#121c2a]/95 text-white backdrop-blur-md px-3 py-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-1.5 text-xs font-medium transition-all select-none';
+    hud.className = 'fixed bottom-3 left-1/2 -translate-x-1/2 z-50 select-none max-w-[96vw] transition-all duration-300';
 
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -680,35 +765,62 @@
     ];
 
     let html = `
-      <div class="flex items-center gap-1 pr-2 border-r border-white/20">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="font-bold text-emerald-300">HoneyChain</span>
-      </div>
-      <div class="flex items-center gap-1 overflow-x-auto max-w-[80vw] sm:max-w-none">
+      <!-- Expanded State -->
+      <div id="hud-expanded-bar" class="bg-[#121c2a]/95 text-white backdrop-blur-md px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-1 text-[11px] sm:text-xs font-medium">
+        <div class="flex items-center gap-1 pr-1.5 sm:pr-2 border-r border-white/20 shrink-0">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-bold text-emerald-300 hidden sm:inline">HoneyChain</span>
+        </div>
+        <div class="flex items-center gap-1 overflow-x-auto max-w-[calc(94vw-90px)] sm:max-w-none py-0.5" style="scrollbar-width: none; -ms-overflow-style: none;">
     `;
 
     screens.forEach(s => {
       const active = currentPath === s.file;
       html += `
-        <a href="${s.file}" class="px-2.5 py-1 rounded-full whitespace-nowrap transition-all ${active ? 'bg-emerald-600 text-white font-bold shadow' : 'text-slate-300 hover:text-white hover:bg-white/10'}">
+        <a href="${s.file}" class="px-2 sm:px-2.5 py-1 rounded-full whitespace-nowrap transition-all ${active ? 'bg-emerald-600 text-white font-bold shadow' : 'text-slate-300 hover:text-white hover:bg-white/10'}">
           ${s.name}
         </a>
       `;
     });
 
     html += `
+        </div>
+        <button id="hud-collapse-btn" class="ml-1 text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 shrink-0" title="Collapse HUD">
+          <span class="material-symbols-outlined text-[16px]">expand_more</span>
+        </button>
       </div>
-      <button class="ml-1 text-slate-400 hover:text-white p-1" title="Toggle HUD" onclick="this.parentElement.classList.toggle('opacity-30')">
-        <span class="material-symbols-outlined text-[16px]">visibility</span>
+
+      <!-- Collapsed State -->
+      <button id="hud-expand-btn" class="hidden bg-[#121c2a]/95 text-white backdrop-blur-md px-3 py-1.5 rounded-full shadow-2xl border border-white/10 flex items-center gap-1.5 text-xs font-medium hover:bg-[#1b2a3f] transition-all">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-bold text-emerald-300">Screens (8)</span>
+        <span class="material-symbols-outlined text-[16px]">expand_less</span>
       </button>
     `;
 
     hud.innerHTML = html;
     document.body.appendChild(hud);
+
+    // Collapse / Expand Toggle Handlers
+    const bar = document.getElementById('hud-expanded-bar');
+    const pill = document.getElementById('hud-expand-btn');
+    const collapseBtn = document.getElementById('hud-collapse-btn');
+
+    if (collapseBtn && bar && pill) {
+      collapseBtn.addEventListener('click', () => {
+        bar.classList.add('hidden');
+        pill.classList.remove('hidden');
+      });
+      pill.addEventListener('click', () => {
+        pill.classList.add('hidden');
+        bar.classList.remove('hidden');
+      });
+    }
   }
 
   // --- Initialize on DOMContentLoaded ---
   document.addEventListener('DOMContentLoaded', () => {
+    initMobileNavigation();
     initNavigation();
     initHeaderUser();
     injectSharedModals();
