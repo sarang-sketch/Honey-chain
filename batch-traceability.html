@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head>
+  <title>Honey Chain | Distributed Traceability Ledger & Consensus Audit</title><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-dim":"#d0dbed","on-error-container":"#93000a","primary-fixed":"#c1ecd4","inverse-on-surface":"#eaf1ff","on-primary-container":"#86af99","on-primary":"#ffffff","surface-variant":"#d9e3f6","outline":"#717973","on-tertiary":"#ffffff","error-container":"#ffdad6","surface-container-highest":"#d9e3f6","inverse-surface":"#27313f","on-error":"#ffffff","surface-container-high":"#dee9fc","outline-variant":"#c1c8c2","tertiary-fixed":"#89f5e7","primary-fixed-dim":"#a5d0b9","on-tertiary-fixed-variant":"#005049","on-secondary-fixed":"#2f1500","inverse-primary":"#a5d0b9","tertiary-container":"#00443e","surface-tint":"#3f6653","on-background":"#121c2a","on-secondary-container":"#663500","tertiary":"#002c28","on-primary-fixed":"#002114","surface-container-lowest":"#ffffff","surface-bright":"#f8f9ff","primary":"#012d1d","secondary":"#904d00","secondary-fixed":"#ffdcc3","error":"#ba1a1a","surface-container-low":"#eff4ff","primary-container":"#1b4332","on-tertiary-container":"#46b7aa","on-secondary":"#ffffff","on-primary-fixed-variant":"#274e3d","secondary-fixed-dim":"#ffb77d","tertiary-fixed-dim":"#6bd8cb","on-surface":"#121c2a","on-tertiary-fixed":"#00201d","on-secondary-fixed-variant":"#6e3900","background":"#f8f9ff","surface-container":"#e6eeff","surface":"#f8f9ff","secondary-container":"#fe932c","on-surface-variant":"#414844"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xl":"2.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-mobile":"1rem","gutter":"1.5rem"},fontFamily:{"title-sm":["Inter"],"metric-mono":["JetBrains Mono"],"label-md":["Inter"],"headline-xl":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-sm":["Inter"],"title-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"title-lg":["Plus Jakarta Sans"],"body-sm":["Inter"],"body-lg":["Inter"]},fontSize:{"title-sm":["14px",{"lineHeight":"20px","fontWeight":"600"}],"metric-mono":["13px",{"lineHeight":"18px","fontWeight":"500"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-xl-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"title-lg":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><img alt="Honey Chain Brand Logo" class="h-8 w-auto object-contain" src="assets/logo.svg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">HoneyChain</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Production v2.4</span></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">IoT Gateway Mesh</span></div><span class="font-metric-mono text-metric-mono text-primary bg-primary-fixed px-space-xs rounded font-semibold">42/42 Live</span></div></div><nav class="flex flex-col gap-1 px-space-md mt-space-sm" data-active-classes="bg-primary-container text-on-primary font-title-sm rounded-lg"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="overview-dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">grid_view</span><span class="font-title-sm text-title-sm">Overview</span></div><span class="font-metric-mono text-metric-mono bg-surface-container text-on-surface px-1.5 py-0.5 rounded text-xs">Live</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="my-hives-iot-live" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">sensors</span><span class="font-title-sm text-title-sm">My Hives</span></div><span class="font-metric-mono text-metric-mono bg-primary-fixed text-primary px-1.5 py-0.5 rounded text-xs">42 IoT</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-health-insights" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">psychology</span><span class="font-title-sm text-title-sm">AI Health Insights</span></div><span class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed-variant px-1.5 py-0.5 rounded text-xs">98.4%</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="harvest-batching" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">science</span><span class="font-title-sm text-title-sm">Harvest &amp; Batching</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-all group bg-primary-container text-on-primary font-title-sm rounded-lg" data-path="batch-traceability-blockchain" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">token</span><span class="font-title-sm text-title-sm">Traceability Ledger</span></div><span class="font-metric-mono text-metric-mono bg-tertiary-fixed text-on-tertiary-fixed-variant px-1.5 py-0.5 rounded text-xs">Web3</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="stakeholder-portals" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">corporate_fare</span><span class="font-title-sm text-title-sm">Stakeholder Portals</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="consumer-qr-scanner" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">qr_code_scanner</span><span class="font-title-sm text-title-sm">Consumer QR Scan</span></div></a></nav></div><div class="p-space-md flex flex-col gap-space-xs"><div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-on-surface-variant text-sm">verified</span><span class="font-label-sm text-label-sm text-on-surface-variant">KVIC &amp; FSSAI Compliant</span></div></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="system-settings-help" href="#"><span class="material-symbols-outlined text-on-surface-variant">help</span><span class="font-title-sm text-title-sm">Settings &amp; Guide</span></a></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-md py-1.5 bg-primary-fixed/40 rounded-full"><span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span><span class="font-metric-mono text-metric-mono text-primary font-semibold tracking-tight">Gateway LoRa: Online â€¢ 42 Hives Connected</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded-lg"><span class="material-symbols-outlined text-on-surface-variant text-sm">supervised_user_circle</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Role:</span><span class="font-title-sm text-title-sm text-primary">Lead Apiarist</span><span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span></div><button class="relative p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-secondary-container rounded-full ring-2 ring-surface-container-lowest"></span></button><div class="h-8 w-px bg-surface-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="assets/officer_avatar.jpg"/><div class="flex flex-col text-left"><span class="font-title-sm text-title-sm text-on-surface leading-tight">Dr. Priya Sharma</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-0.5">Agri Officer / Lead Apiarist</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full px-space-lg py-space-md space-y-space-lg">
+<!-- Top Context Ribbon -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 bg-primary-fixed text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-title-lg">verified_user</span>
+</span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Cryptographic Audit Console</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-metric-mono bg-primary text-on-primary">Ledger Node #04 (Sync OK)</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-primary tracking-tight">Traceability &amp; Consensus Audit</h1>
+</div>
+</div>
+<!-- Action Cluster --><div class="flex flex-wrap items-center gap-space-xs"><div class="flex items-center gap-2">
+  <label class="text-xs font-semibold text-on-surface-variant uppercase">Batch:</label>
+  <select id="batchSelectorDropdown" class="h-9 px-2.5 rounded-lg bg-surface-container text-on-surface font-metric-mono text-xs font-bold focus:outline-none focus:ring-2 focus:ring-primary border border-surface-variant">
+    <option value="BCH2026A001">BCH2026A001 (Himalayan)</option>
+    <option value="BCH2026B002">BCH2026B002 (Coorg)</option>
+    <option value="BCH2026C003">BCH2026C003 (Sundarbans)</option>
+  </select>
+</div>
+<button class="h-10 px-space-md bg-surface-container hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg rounded-lg transition-all flex items-center gap-2" onclick="copyLedgerHash('0x7f3ab9812eef43109a8bc43d1004fa920e81b82e91')">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+<span>Copy Root Hash</span>
+</button>
+<button id="btnCertPdf" class="h-10 px-space-md bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-lg text-label-lg rounded-lg transition-all flex items-center gap-2 shadow-sm"><span class="material-symbols-outlined text-sm">download</span><span>Certificate PDF</span></button>
+</div>
+</div>
+<!-- Batch Header Banner with Visual Glassmorphism Over Nature Texture -->
+<div class="relative overflow-hidden rounded-xl bg-primary text-on-primary shadow-md">
+<div class="absolute inset-0 opacity-15 bg-cover bg-center pointer-events-none" data-alt="Close-up macro photography of pristine geometric natural honeycomb frames glowing with golden Himalayan multiflora raw organic honey under ambient soft morning sunlight in a sustainable apiary" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD0EFKhUvXY00gLexdWFd3EyqbXw3t478s6lONcTo5Rp3wPjdf6PtWLj_wfH8qD2dB06SUOnypBpJ5zb_5P_0MFJxSxBahqbiSqEyWYeJa2we4LcHdc5XN75JIxkQHcXNgZWWQJMOsfl055XD7dWS64inC3vySP2LilsxciQUp-RoAXjylgrsnyoA_9mBdY90cNUUg8A-t1d9cgsyDseKHN7zaoJC2wNnTQ7PCvg36Uyt41ZOC-_VtD')"></div>
+<div class="relative z-10 p-space-lg flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<div class="max-w-2xl space-y-space-xs">
+<div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-primary-fixed/20 backdrop-blur-md text-primary-fixed font-metric-mono text-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span>BATCH #BCH2026A001</span>
+<span>â€¢</span>
+<span>POLYGON PoS CONSENSUS LOCKED</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-primary tracking-tight">Pure Himalayan Multiflora Honey</h2>
+<p class="font-body-md text-body-md text-on-primary-container leading-relaxed">
+          Tamper-evident supply chain passport indexed through multi-signature LoRaWAN hive telemetry, calibrated isotopic testing, and smart-contract backed retail issuance.
+        </p>
+</div>
+<!-- State Status Card -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-md rounded-xl p-space-md flex flex-col justify-between self-start xl:self-auto min-w-[280px]">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider">Status Confirmation</span>
+<span class="material-symbols-outlined text-secondary-fixed">shield</span>
+</div>
+<div class="font-title-lg text-title-lg text-on-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-lg">check_circle</span>
+          Consensus Confirmed
+        </div>
+<span class="font-label-sm text-label-sm text-on-primary-container mt-1">4,821 Multi-Node Confirmations</span>
+</div>
+</div>
+<!-- Summary Chip Grid Strip -->
+<div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-on-primary/10">
+<div class="p-space-md bg-primary-container/90 flex flex-col">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Total Certified Mass</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary mt-1">142.50 <span class="font-body-sm text-body-sm font-normal">kg</span></span>
+<span class="font-metric-mono text-xs text-on-primary-container mt-0.5">Yield Target: 100%</span>
+</div>
+<div class="p-space-md bg-primary-container/90 flex flex-col">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Floral Source</span>
+<span class="font-headline-sm text-headline-sm font-bold text-secondary-fixed mt-1">Mustard &amp; Wild Acacia</span>
+<span class="font-metric-mono text-xs text-on-primary-container mt-0.5">Pollen Purity: 96.4%</span>
+</div>
+<div class="p-space-md bg-primary-container/90 flex flex-col">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Harvest Timestamp</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary mt-1">14 Feb 2026</span>
+<span class="font-metric-mono text-xs text-on-primary-container mt-0.5">08:42 IST â€¢ Phase 1</span>
+</div>
+<div class="p-space-md bg-primary-container/90 flex flex-col">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Allocated Units</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary mt-1">285 Jars</span>
+<span class="font-metric-mono text-xs text-on-primary-container mt-0.5">500g UV-Shield Glass</span>
+</div>
+</div>
+</div>
+<!-- Split Analytical Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: End-to-End Visual Audit Trail (8 Cols) -->
+<div class="xl:col-span-8 space-y-space-md">
+<!-- Section Title & Telemetry Pulse -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-secondary animate-ping"></div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">End-to-End Chain of Custody</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">6 of 6 Verified Cryptographic Milestones</p>
+</div>
+</div>
+<span class="font-metric-mono text-xs text-primary px-space-sm py-1 bg-primary-fixed rounded-md">Smart Contract: Executed</span>
+</div>
+<!-- Stepper Vertical Pipeline -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-md">
+<!-- Milestone 1 -->
+<div class="flex gap-space-md relative group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">sensors</span>
+</div>
+<div class="w-0.5 grow bg-primary mt-2"></div>
+</div>
+<div class="grow pb-space-lg bg-surface-container-low p-space-md rounded-xl space-y-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-primary-fixed text-primary px-2 py-0.5 rounded">Milestone 01</span>
+<h4 class="font-title-md text-title-md text-on-surface">Hive Registered &amp; Monitored</h4>
+</div>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant">14 Oct 2025 â€¢ 06:00 IST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Deployed on <strong>Smart Hive H-001</strong>. Integrated LoRaWAN telemetry verified uninterrupted internal brood thermoregulation (steady at 35.1Â°C) with low vibrational acoustic anomalies prior to comb filling.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Avg Brood Temp</span>
+<span class="font-metric-mono text-sm text-primary font-bold">35.1 Â°C (Â±0.2)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Location Coordinates</span>
+<span class="font-metric-mono text-xs text-on-surface truncate block">31.1048Â° N, 77.1734Â° E</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Witness Signature</span>
+<span class="font-metric-mono text-xs text-primary truncate block">0x81b0...d431</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="flex gap-space-md relative group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">agriculture</span>
+</div>
+<div class="w-0.5 grow bg-primary mt-2"></div>
+</div>
+<div class="grow pb-space-lg bg-surface-container-low p-space-md rounded-xl space-y-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-primary-fixed text-primary px-2 py-0.5 rounded">Milestone 02</span>
+<h4 class="font-title-md text-title-md text-on-surface">Honey Harvested &amp; Sealed</h4>
+</div>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant">14 Feb 2026 â€¢ 09:15 IST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Field extraction executed by verified apiarist <strong>Ramdas Patel</strong> (Govt ID: HP-API-8842). Harvest weight locked via load-cell scale directly transmitting cryptographic weight payload.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Comb Mass Yield</span>
+<span class="font-metric-mono text-sm text-primary font-bold">142.50 kg Raw</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Moisture at Hive</span>
+<span class="font-metric-mono text-sm text-secondary font-bold">16.8% (Target &lt; 20%)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Beekeeper Proof</span>
+<span class="font-metric-mono text-xs text-primary truncate block">Signed with Ledger DID</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 3 (Quality Gate - Highlighted) -->
+<div class="flex gap-space-md relative group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">biotech</span>
+</div>
+<div class="w-0.5 grow bg-primary mt-2"></div>
+</div>
+<div class="grow pb-space-lg bg-surface-container-high p-space-md rounded-xl space-y-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded font-bold">Lab Certified</span>
+<h4 class="font-title-md text-title-md text-on-surface">Purity &amp; Isotopic Sugar Testing</h4>
+</div>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant">16 Feb 2026 â€¢ 14:20 IST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+              Audited by accredited <strong>NABL Facility #082</strong>. Nuclear Magnetic Resonance (NMR) spectroscopic profiling confirms 0.00% foreign C4 syrups or thermal hydroxymethylfurfural adulteration.
+            </p>
+<!-- Chemical Profiling Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">C4 Inverted Sugar</span>
+<span class="font-metric-mono text-title-sm text-primary font-bold">0.00% (Pure)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Tested Moisture</span>
+<span class="font-metric-mono text-title-sm text-primary font-bold">16.80%</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">HMF Content</span>
+<span class="font-metric-mono text-title-sm text-primary font-bold">8.2 mg/kg</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">F/G Ratio</span>
+<span class="font-metric-mono text-title-sm text-primary font-bold">1.24 (Ideal)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-on-surface-variant pt-1">
+<span class="font-metric-mono">Certificate Hash: 0x33e8ca...b901a</span>
+<span class="text-primary font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> NABL Certified</span>
+</div>
+</div>
+</div>
+<!-- Milestone 4 -->
+<div class="flex gap-space-md relative group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+</div>
+<div class="w-0.5 grow bg-primary mt-2"></div>
+</div>
+<div class="grow pb-space-lg bg-surface-container-low p-space-md rounded-xl space-y-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-primary-fixed text-primary px-2 py-0.5 rounded">Milestone 04</span>
+<h4 class="font-title-md text-title-md text-on-surface">Cold Filtered &amp; Low-RPM Centrifuged</h4>
+</div>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant">18 Feb 2026 â€¢ 11:30 IST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Transferred to <strong>Solan Certified Organic Facility</strong>. Single gravity settling followed by micro-filtration (&lt; 200 microns) without ultrasonic or high-heat pasteurization, preserving active diastase enzymes.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Processing Temp</span>
+<span class="font-metric-mono text-sm text-primary font-bold">29.4 Â°C (Raw Certified)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Facility Lic</span>
+<span class="font-metric-mono text-xs text-on-surface">FSSAI-10023021000912</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Plant Supervisor</span>
+<span class="font-metric-mono text-xs text-on-surface">V. R. Mukherjee</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 5 -->
+<div class="flex gap-space-md relative group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">qr_code_2</span>
+</div>
+<div class="w-0.5 grow bg-primary mt-2"></div>
+</div>
+<div class="grow pb-space-lg bg-surface-container-low p-space-md rounded-xl space-y-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-primary-fixed text-primary px-2 py-0.5 rounded">Milestone 05</span>
+<h4 class="font-title-md text-title-md text-on-surface">Packaged &amp; Individual QR Affixed</h4>
+</div>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant">19 Feb 2026 â€¢ 17:00 IST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Bottled into hermetically sealed dark amber jars preventing photodegradation. Each unit minted with an individual asymmetric cryptographic NFC &amp; QR link connected to batch payload #BCH2026A001.
+            </p>
+<div class="flex flex-wrap gap-space-xs pt-space-xs">
+<span class="font-metric-mono text-xs bg-surface-container-lowest px-2 py-1 rounded text-on-surface">Jar Range: #001 to #285</span>
+<span class="font-metric-mono text-xs bg-surface-container-lowest px-2 py-1 rounded text-on-surface">Security Seal: Holographic Foil Tamper-Void</span>
+</div>
+</div>
+</div>
+<!-- Milestone 6 -->
+<div class="flex gap-space-md relative group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+</div>
+</div>
+<div class="grow bg-surface-container-low p-space-md rounded-xl space-y-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-primary text-on-primary px-2 py-0.5 rounded">Milestone 06</span>
+<h4 class="font-title-md text-title-md text-on-surface">Distributed to Retail Outlets</h4>
+</div>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant">21 Feb 2026 â€¢ 07:45 IST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Cold-transit consignment dispatched via GPS-logged climate logistics fleet to designated organic certified retailers across Delhi NCR and Mumbai. Consignment status: In transit / partially stocked.
+            </p>
+<div class="flex flex-wrap gap-2 text-xs text-on-surface-variant pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary">pin_drop</span> Delhi Khadi Emporium (140 Units)</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary">pin_drop</span> Mumbai Green Soul Bio (145 Units)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Facility Origin Photomosaic Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="relative overflow-hidden rounded-xl h-48 group shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="High altitude pristine bee boxes situated across sunny green valley terrace in Himachal Pradesh with blooming mustard and acacia flowers, natural sunlight, cinematic agricultural shot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnRq98tyUGOWx7uVMilD0d9n4-h0M-r6myoi7W6-fOtb1jBk03VhbMr5jeZaS-phGdJXZ7XVxz2OxeuIrOCw8rGq0fIWCN9M87xkrxcLVxFWErfg4iY6Ptx052xbSWypfvWX3CF5PLQbexBROvhfolPgHnPC8-kCOYYVw1LEUVVGBUzsOPHylJ52b_wwbRvgYlluMcX56D5Ms7QKlLLNKPFZi89HHAjCqEYoXuayYaKEEwZ0m7xELE')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-space-md text-on-primary">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider block">Apiary Site Elevation 2,100m</span>
+<span class="font-title-md text-title-md font-bold">Solan Valley Highlands, HP</span>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-xl h-48 group shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Modern organic food testing laboratory cleanroom with stainless steel spectrometer equipment, amber honey samples in glass flasks, professional analytical lab environment" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRd9s2f8gVaCjl2DZyqPclNzUvPJK_g0ObxKv22CYJAGBFCK8ZSN4bZU8z03st06YEERtlB36-rpihghy-4lMN8KZ3ig_c9yF9eZ4DBdcNO-3XkjF5ppg_6iijQ-csQPTeahYWd0IZ_JtUGc4JGUBuHX4waP_4jg_DMilXjYFOl1IzqL_ZGVDDv9B7ZtKLxpHqXbAsWr16u9tDnga0Xr3C3Zcik-xzotD02gHG6j1PsAPDaUNrL-29')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-space-md text-on-primary">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider block">NABL Accredited Lab Testing</span>
+<span class="font-title-md text-title-md font-bold">Shimla Bio-Chemical Division</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Blockchain Records & Verification Panel (4 Cols) -->
+<div class="xl:col-span-4 space-y-space-md">
+<!-- Verification QR Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm text-center space-y-space-md">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Public Verification Key</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1">Scan to Verify Provenance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Consumer QR affixed on Jar #001 through #285</p>
+</div>
+<!-- High Contrast QR Matrix Box -->
+<div class="relative mx-auto w-52 h-52 bg-surface-container-low p-4 rounded-xl flex items-center justify-center shadow-inner">
+<svg class="w-44 h-44 text-primary" fill="currentColor" viewbox="0 0 100 100">
+<!-- Hexagonal stylized QR representation -->
+<path d="M5 5 h30 v30 h-30 z M10 10 v20 h20 v-20 z M15 15 h10 v10 h-10 z"></path>
+<path d="M65 5 h30 v30 h-30 z M70 10 v20 h20 v-20 z M75 15 h10 v10 h-10 z"></path>
+<path d="M5 65 h30 v30 h-30 z M10 70 v20 h20 v-20 z M15 75 h10 v10 h-10 z"></path>
+<rect height="18" width="6" x="42" y="8"></rect>
+<rect height="12" width="6" x="52" y="14"></rect>
+<rect height="6" width="16" x="8" y="42"></rect>
+<rect height="6" width="12" x="18" y="52"></rect>
+<rect class="text-secondary" fill="currentColor" height="16" rx="2" width="16" x="42" y="42"></rect>
+<rect height="6" width="10" x="65" y="42"></rect>
+<rect height="6" width="12" x="82" y="42"></rect>
+<rect height="12" width="6" x="65" y="54"></rect>
+<rect height="6" width="16" x="78" y="54"></rect>
+<rect height="16" width="8" x="42" y="65"></rect>
+<rect height="8" width="18" x="56" y="70"></rect>
+<rect height="8" width="22" x="42" y="86"></rect>
+<rect height="12" width="12" x="70" y="82"></rect>
+<rect height="22" width="8" x="86" y="72"></rect>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-secondary text-base">hive</span>
+</div>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Consensus Protocol</span>
+<span class="font-metric-mono text-xs text-primary font-bold">PoS / IBFT 2.0</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Batch Seal State</span>
+<span class="font-metric-mono text-xs text-primary font-bold">Cryptographically Immutable</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<button id="btnSimulateConsumer" class="w-full h-11 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg rounded-lg transition-all flex items-center justify-center gap-2 shadow-sm"><span class="material-symbols-outlined text-sm">open_in_new</span><span>Simulate Consumer QR View</span></button>
+<button id="btnBlockExplorer" class="w-full h-11 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg rounded-lg transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">verified</span><span>Verify on Block Explorer</span></button>
+</div>
+</div>
+<!-- Immutable Blockchain Record Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="p-2 bg-primary-fixed text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">token</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Cryptographic Provenance</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Distributed Ledger Veracity</span>
+</div>
+</div>
+<!-- Official Disclaimer / Advisory Notice -->
+<div class="bg-surface-container-low p-space-sm rounded-lg text-xs leading-relaxed text-on-surface-variant flex gap-space-xs items-start">
+<span class="material-symbols-outlined text-secondary text-sm shrink-0 mt-0.5">info</span>
+<span>
+<strong>Statutory Notice:</strong> Blockchain technology preserves the immutable recorded history and chain of custody; independent accredited laboratory tests (NMR &amp; isotopic testing) verify product purity.
+          </span>
+</div>
+<!-- Ledger Details Specs -->
+<div class="space-y-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Blockchain Network</span>
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface">Polygon PoS â€¢ Hyperledger Agri-Channel</span>
+<span class="font-metric-mono text-xs bg-primary-fixed text-primary px-1.5 py-0.5 rounded font-semibold">Mainnet</span>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Smart Contract Address</span>
+<div class="flex items-center justify-between">
+<span class="font-metric-mono text-metric-mono text-primary font-bold">0x9a8f47c8...4e1bc2a9</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="copyLedgerHash('0x9a8f47c8d9241b16238bfa76019a124e1bc2a9')">
+<span class="material-symbols-outlined text-base">copy_all</span>
+</button>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Transaction Hash</span>
+<div class="flex items-center justify-between">
+<span class="font-metric-mono text-metric-mono text-primary font-bold truncate max-w-[200px]">0x7f3a9e14bc...b82e91</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="copyLedgerHash('0x7f3a9e14bc49102837482910fa983710928b82e91')">
+<span class="material-symbols-outlined text-base">copy_all</span>
+</button>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Block Height &amp; Confirmations</span>
+<div class="flex items-center justify-between">
+<span class="font-metric-mono text-metric-mono text-on-surface font-semibold">#19,402,812</span>
+<span class="font-metric-mono text-xs text-primary font-bold">4,821 Confirmations</span>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Telemetry Merkle Root</span>
+<div class="flex items-center justify-between">
+<span class="font-metric-mono text-xs text-on-surface-variant truncate max-w-[210px]">merkle:8cf4920a...33190b</span>
+<span class="material-symbols-outlined text-primary text-sm">lock</span>
+</div>
+</div>
+</div>
+<!-- Cryptographic Attestation Seal -->
+<div class="p-space-md bg-surface-container rounded-xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-2xl">workspace_premium</span>
+<div class="text-xs text-on-surface leading-tight">
+<span class="font-bold block text-title-sm text-primary">HoneyChain Certified Audit Stamp</span>
+<span>Cryptographic multi-signature verified across lead beekeeper, certified laboratory, and packaging facility.</span>
+</div>
+</div>
+</div>
+<!-- Quick Inspection Widget -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface">Hive Telemetry Health Score</span>
+<span class="font-metric-mono text-title-sm text-primary font-bold">99.2 / 100</span>
+</div>
+<!-- Visual Telemetry Bar Indicator -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 99.2%"></div>
+</div>
+<div class="flex justify-between text-xs text-on-surface-variant font-metric-mono">
+<span>Acoustics: Nominal</span>
+<span>In-hive Temp: 35.1Â°C</span>
+<span>Varroa Risk: Nil</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification Dynamic Shell -->
+<div class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-primary text-on-primary px-space-md py-space-sm rounded-xl shadow-lg flex items-center gap-space-xs z-50" id="copyToast">
+<span class="material-symbols-outlined text-primary-fixed">task_alt</span>
+<span class="font-body-sm text-body-sm font-medium" id="toastMessage">Cryptographic Hash Copied to Clipboard</span>
+</div>
+</div>
+<!-- Certificate PDF Modal -->
+<div id="certificate-pdf-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-md items-center justify-center p-4">
+  <div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-3xl w-full p-8 border border-secondary-fixed/40 flex flex-col gap-6 relative max-h-[92vh] overflow-y-auto print:shadow-none print:border-none">
+    <button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container print:hidden" onclick="HoneyModal.close('certificate-pdf-modal')">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <!-- Certificate Header with Seals -->
+    <div class="flex items-start justify-between border-b-2 border-primary pb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-14 h-14 rounded-xl bg-primary text-on-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-3xl text-secondary-fixed">verified</span>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest">Government of India • Ministry of Agriculture &amp; KVIC</span>
+          <h2 class="text-2xl font-extrabold text-primary font-headline-lg">Certificate of Apiculture Provenance</h2>
+          <p class="text-xs text-on-surface-variant">Immutable Blockchain Veracity &amp; NMR Chemical Purity Guarantee</p>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="px-3 py-1 rounded-full bg-primary-fixed text-primary font-metric-mono text-xs font-bold">CERT #NABL-HP-9812</div>
+        <div class="text-[11px] text-on-surface-variant mt-1">Issued: 20 Feb 2026</div>
+      </div>
+    </div>
+
+    <!-- Certificate Body -->
+    <div class="space-y-4 text-sm text-on-surface">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-surface-container-low p-4 rounded-xl">
+        <div>
+          <span class="text-[11px] text-on-surface-variant uppercase font-semibold block">Batch Serial ID</span>
+          <span id="certBatchId" class="font-metric-mono font-bold text-primary">BCH2026A001</span>
+        </div>
+        <div>
+          <span class="text-[11px] text-on-surface-variant uppercase font-semibold block">Botanical Floral Source</span>
+          <span id="certFloral" class="font-semibold text-on-surface">Mustard &amp; Wild Acacia</span>
+        </div>
+        <div>
+          <span class="text-[11px] text-on-surface-variant uppercase font-semibold block">Harvest Mass &amp; Units</span>
+          <span id="certMass" class="font-semibold text-on-surface">142.50 kg (285 Jars)</span>
+        </div>
+        <div>
+          <span class="text-[11px] text-on-surface-variant uppercase font-semibold block">Origin Altitude</span>
+          <span id="certAltitude" class="font-metric-mono font-semibold text-on-surface">1,220m ASL (Kullu)</span>
+        </div>
+      </div>
+
+      <!-- Chemical Purity Lab Attestation Table -->
+      <div>
+        <h4 class="font-bold text-primary text-sm mb-2 flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-base">biotech</span>
+          NABL Accredited Laboratory NMR Chemical Testing Profile
+        </h4>
+        <div class="border border-surface-variant rounded-xl overflow-hidden">
+          <table class="w-full text-xs">
+            <thead class="bg-surface-container text-on-surface-variant">
+              <tr>
+                <th class="p-2.5 text-left">Test Parameter</th>
+                <th class="p-2.5 text-left">FSSAI / KVIC Norm</th>
+                <th class="p-2.5 text-left">Tested Value</th>
+                <th class="p-2.5 text-right">Compliance</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-surface-container-low font-metric-mono">
+              <tr>
+                <td class="p-2.5 font-sans font-medium">Carbon-13 Isotope (C4 Added Sugars)</td>
+                <td class="p-2.5">&le; 7.0% Max</td>
+                <td class="p-2.5 text-primary font-bold">0.00% (Delta -26.8‰)</td>
+                <td class="p-2.5 text-right font-sans"><span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold">PASS</span></td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans font-medium">Hydroxymethylfurfural (HMF)</td>
+                <td class="p-2.5">&le; 40 mg/kg</td>
+                <td class="p-2.5 text-primary font-bold">8.4 mg/kg (Unheated)</td>
+                <td class="p-2.5 text-right font-sans"><span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold">PASS</span></td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans font-medium">Moisture Content</td>
+                <td class="p-2.5">&le; 20% Max</td>
+                <td class="p-2.5 text-primary font-bold">16.8% (Stable)</td>
+                <td class="p-2.5 text-right font-sans"><span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold">PASS</span></td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans font-medium">Pollen Spectrum Signature</td>
+                <td class="p-2.5">&ge; 70% Regional Flora</td>
+                <td class="p-2.5 text-primary font-bold">96.4% Pure Pollen</td>
+                <td class="p-2.5 text-right font-sans"><span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold">PASS</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Blockchain Cryptographic Stamp -->
+      <div class="p-3 bg-surface-container-low rounded-xl flex items-center justify-between text-xs font-metric-mono">
+        <div>
+          <span class="text-on-surface-variant block text-[10px]">Polygon PoS Tx Hash</span>
+          <span id="certTxHash" class="text-primary font-bold break-all">0x7f3ab9812eef43109a8bc43d1004fa920e81b82e917d6c6e7a2b0246a489dc2</span>
+        </div>
+        <div class="text-right shrink-0 ml-4">
+          <span class="text-on-surface-variant block text-[10px]">Consensus Status</span>
+          <span class="text-primary font-bold">CONFIRMED (4,821 Multi-Sig)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="pt-3 border-t border-surface-variant flex justify-between items-center print:hidden">
+      <button class="px-4 py-2 text-xs bg-surface-container hover:bg-surface-container-high rounded-lg flex items-center gap-1.5" onclick="window.print()">
+        <span class="material-symbols-outlined text-sm">print</span>
+        <span>Print Certificate</span>
+      </button>
+      <button class="px-5 py-2 text-xs bg-primary text-on-primary font-semibold rounded-lg hover:bg-primary-container" onclick="HoneyToast('Official Authenticity Certificate downloaded', 'success'); HoneyModal.close('certificate-pdf-modal');">
+        Download Signed PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Explorer Modal -->
+<div id="explorer-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4">
+  <div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-lg w-full p-6 border border-surface-variant flex flex-col gap-4 relative">
+    <button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container" onclick="HoneyModal.close('explorer-modal')">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-2xl">travel_explore</span>
+      </div>
+      <div>
+        <h3 class="font-headline-sm text-headline-sm text-primary font-bold">Polygon PoS Block Explorer</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">Immutable Mainnet Multi-Sig Proof</p>
+      </div>
+    </div>
+
+    <div class="space-y-3 bg-surface-container-low p-4 rounded-xl text-xs font-metric-mono">
+      <div>
+        <span class="text-on-surface-variant block">Block Height</span>
+        <span class="text-primary font-bold text-sm">#54,910,284</span>
+      </div>
+      <div>
+        <span class="text-on-surface-variant block">Transaction Hash</span>
+        <span class="text-on-surface break-all font-semibold" id="explorerTxHash">0x7f3ab9812eef43109a8bc43d1004fa920e81b82e917d6c6e7a2b0246a489dc2</span>
+      </div>
+      <div>
+        <span class="text-on-surface-variant block">Smart Contract Address</span>
+        <span class="text-primary font-bold">0x9A4eF48B227cA710d8F35B3B709C2fF98A190b41 (ERC-1155)</span>
+      </div>
+      <div>
+        <span class="text-on-surface-variant block">Gas Used</span>
+        <span class="text-on-surface">48,210 Gas Units (0.00192 POL)</span>
+      </div>
+      <div>
+        <span class="text-on-surface-variant block">IPFS Merkle Storage</span>
+        <span class="text-secondary font-bold">ipfs://QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG</span>
+      </div>
+    </div>
+
+    <div class="pt-2 flex justify-end">
+      <button class="px-4 py-2 text-xs bg-primary text-on-primary font-semibold rounded-lg hover:bg-primary-container" onclick="HoneyModal.close('explorer-modal')">
+        Close Explorer View
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    let activeBatchId = params.get('batch') || 'BCH2026A001';
+
+    // Populate dropdown with all batches (including newly created ones)
+    const dropdown = document.getElementById('batchSelectorDropdown');
+    const allBatches = HoneyDataStore.getBatches();
+
+    if (dropdown) {
+      dropdown.innerHTML = '';
+      allBatches.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b.id;
+        opt.textContent = `${b.id} (${b.name.split(' ')[0]})`;
+        if (b.id.toUpperCase() === activeBatchId.toUpperCase()) {
+          opt.selected = true;
+        }
+        dropdown.appendChild(opt);
+      });
+
+      dropdown.addEventListener('change', (e) => {
+        loadBatchData(e.target.value);
+      });
+    }
+
+    function loadBatchData(batchId) {
+      activeBatchId = batchId;
+      const batch = HoneyDataStore.getBatchById(batchId);
+      if (!batch) return;
+
+      // Update Title & Badges
+      const titleEl = document.querySelector('h2.font-headline-lg');
+      if (titleEl) titleEl.textContent = batch.name;
+
+      const batchChip = Array.from(document.querySelectorAll('span')).find(s => s.textContent.includes('BATCH #'));
+      if (batchChip) batchChip.textContent = `BATCH #${batch.id}`;
+
+      // Update Certificate modal elements
+      const certBatch = document.getElementById('certBatchId');
+      if (certBatch) certBatch.textContent = batch.id;
+
+      const certFloral = document.getElementById('certFloral');
+      if (certFloral) certFloral.textContent = batch.floralSource;
+
+      const certMass = document.getElementById('certMass');
+      if (certMass) certMass.textContent = `${batch.netWeightKg} kg (${batch.unitsCount} Jars)`;
+
+      const certTx = document.getElementById('certTxHash');
+      if (certTx) certTx.textContent = batch.polygonTx;
+
+      const expTx = document.getElementById('explorerTxHash');
+      if (expTx) expTx.textContent = batch.polygonTx;
+
+      HoneyToast(`Loaded Batch ${batch.id} Ledger Record`, 'info');
+    }
+
+    // Buttons
+    document.getElementById('btnCertPdf')?.addEventListener('click', () => {
+      HoneyModal.open('certificate-pdf-modal');
+    });
+
+    document.getElementById('btnBlockExplorer')?.addEventListener('click', () => {
+      HoneyModal.open('explorer-modal');
+    });
+
+    document.getElementById('btnSimulateConsumer')?.addEventListener('click', () => {
+      window.location.href = `consumer-qr.html?batch=${encodeURIComponent(activeBatchId)}`;
+    });
+
+    // Initial load
+    loadBatchData(activeBatchId);
+  });
+</script>
+</main></div></body></html>

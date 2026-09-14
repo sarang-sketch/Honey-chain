@@ -1,0 +1,826 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head>
+  <title>Honey Chain | Live Hive Telemetry & Bio-Acoustics</title><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-dim":"#d0dbed","on-error-container":"#93000a","primary-fixed":"#c1ecd4","inverse-on-surface":"#eaf1ff","on-primary-container":"#86af99","on-primary":"#ffffff","surface-variant":"#d9e3f6","outline":"#717973","on-tertiary":"#ffffff","error-container":"#ffdad6","surface-container-highest":"#d9e3f6","inverse-surface":"#27313f","on-error":"#ffffff","surface-container-high":"#dee9fc","outline-variant":"#c1c8c2","tertiary-fixed":"#89f5e7","primary-fixed-dim":"#a5d0b9","on-tertiary-fixed-variant":"#005049","on-secondary-fixed":"#2f1500","inverse-primary":"#a5d0b9","tertiary-container":"#00443e","surface-tint":"#3f6653","on-background":"#121c2a","on-secondary-container":"#663500","tertiary":"#002c28","on-primary-fixed":"#002114","surface-container-lowest":"#ffffff","surface-bright":"#f8f9ff","primary":"#012d1d","secondary":"#904d00","secondary-fixed":"#ffdcc3","error":"#ba1a1a","surface-container-low":"#eff4ff","primary-container":"#1b4332","on-tertiary-container":"#46b7aa","on-secondary":"#ffffff","on-primary-fixed-variant":"#274e3d","secondary-fixed-dim":"#ffb77d","tertiary-fixed-dim":"#6bd8cb","on-surface":"#121c2a","on-tertiary-fixed":"#00201d","on-secondary-fixed-variant":"#6e3900","background":"#f8f9ff","surface-container":"#e6eeff","surface":"#f8f9ff","secondary-container":"#fe932c","on-surface-variant":"#414844"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xl":"2.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-mobile":"1rem","gutter":"1.5rem"},fontFamily:{"title-sm":["Inter"],"metric-mono":["JetBrains Mono"],"label-md":["Inter"],"headline-xl":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-sm":["Inter"],"title-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"title-lg":["Plus Jakarta Sans"],"body-sm":["Inter"],"body-lg":["Inter"]},fontSize:{"title-sm":["14px",{"lineHeight":"20px","fontWeight":"600"}],"metric-mono":["13px",{"lineHeight":"18px","fontWeight":"500"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-xl-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"title-lg":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><img alt="Honey Chain Brand Logo" class="h-8 w-auto object-contain" src="assets/logo.svg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">HoneyChain</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Production v2.4</span></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">IoT Gateway Mesh</span></div><span class="font-metric-mono text-metric-mono text-primary bg-primary-fixed px-space-xs rounded font-semibold">42/42 Live</span></div></div><nav class="flex flex-col gap-1 px-space-md mt-space-sm" data-active-classes="bg-primary-container text-on-primary font-title-sm rounded-lg"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="overview-dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">grid_view</span><span class="font-title-sm text-title-sm">Overview</span></div><span class="font-metric-mono text-metric-mono bg-surface-container text-on-surface px-1.5 py-0.5 rounded text-xs">Live</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-all group bg-primary-container text-on-primary font-title-sm rounded-lg" data-path="my-hives-iot-live" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">sensors</span><span class="font-title-sm text-title-sm">My Hives</span></div><span class="font-metric-mono text-metric-mono bg-primary-fixed text-primary px-1.5 py-0.5 rounded text-xs">42 IoT</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-health-insights" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">psychology</span><span class="font-title-sm text-title-sm">AI Health Insights</span></div><span class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed-variant px-1.5 py-0.5 rounded text-xs">98.4%</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="harvest-batching" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">science</span><span class="font-title-sm text-title-sm">Harvest &amp; Batching</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="batch-traceability-blockchain" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">token</span><span class="font-title-sm text-title-sm">Traceability Ledger</span></div><span class="font-metric-mono text-metric-mono bg-tertiary-fixed text-on-tertiary-fixed-variant px-1.5 py-0.5 rounded text-xs">Web3</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="stakeholder-portals" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">corporate_fare</span><span class="font-title-sm text-title-sm">Stakeholder Portals</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="consumer-qr-scanner" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">qr_code_scanner</span><span class="font-title-sm text-title-sm">Consumer QR Scan</span></div></a></nav></div><div class="p-space-md flex flex-col gap-space-xs"><div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-on-surface-variant text-sm">verified</span><span class="font-label-sm text-label-sm text-on-surface-variant">KVIC &amp; FSSAI Compliant</span></div></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="system-settings-help" href="#"><span class="material-symbols-outlined text-on-surface-variant">help</span><span class="font-title-sm text-title-sm">Settings &amp; Guide</span></a></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-md py-1.5 bg-primary-fixed/40 rounded-full"><span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span><span class="font-metric-mono text-metric-mono text-primary font-semibold tracking-tight">Gateway LoRa: Online â€¢ 42 Hives Connected</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded-lg"><span class="material-symbols-outlined text-on-surface-variant text-sm">supervised_user_circle</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Role:</span><span class="font-title-sm text-title-sm text-primary">Lead Apiarist</span><span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span></div><button class="relative p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-secondary-container rounded-full ring-2 ring-surface-container-lowest"></span></button><div class="h-8 w-px bg-surface-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="assets/officer_avatar.jpg"/><div class="flex flex-col text-left"><span class="font-title-sm text-title-sm text-on-surface leading-tight">Dr. Priya Sharma</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-0.5">Agri Officer / Lead Apiarist</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow -->
+<div class="relative overflow-hidden bg-surface pb-space-xl">
+<div class="absolute -top-24 right-10 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-80 -left-20 w-80 h-80 bg-secondary-fixed/25 rounded-full blur-3xl pointer-events-none"></div>
+<div class="px-space-lg pt-space-lg flex flex-col gap-space-lg max-w-[1440px] mx-auto w-full">
+<!-- Breadcrumb & Status Topstrip -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<a class="font-label-md text-label-md hover:text-primary transition-colors" data-path="my-hives-iot-live" href="#">My Hives</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="font-label-md text-label-md text-primary font-semibold">Sector 4 / Kullu Valley Cluster</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="font-metric-mono text-metric-mono bg-surface-container-high px-2 py-0.5 rounded text-primary font-semibold">H-001</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 bg-primary-fixed/40 px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-metric-mono text-metric-mono text-primary font-semibold">Mesh Node 0x7F21: SYNCED (14s ago)</span>
+</div>
+<button id="btnPollNow" class="bg-surface-container-low hover:bg-surface-container-high text-on-surface px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition-all"><span class="material-symbols-outlined text-sm" id="pollIcon">refresh</span><span class="font-label-sm text-label-sm">Poll Now</span></button>
+</div>
+</div>
+<!-- Hive Header Banner -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col xl:flex-row xl:items-center xl:justify-between gap-space-lg relative overflow-hidden">
+<div class="flex flex-col gap-space-sm z-10 max-w-3xl">
+<div class="flex items-center flex-wrap gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Hive H-001 <span class="text-on-surface-variant font-title-lg font-normal">(Mustard &amp; Acacia Super-Box)</span></h1>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed text-primary font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+              HEALTHY (94% Stability Index)
+            </span>
+</div>
+<!-- Metadata Chips -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-sm mt-space-xs">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">person</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Beekeeper</span>
+<span class="font-title-sm text-title-sm text-on-surface truncate">Ramdas Patel</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant/80 truncate">Kullu Apiary Society</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">location_on</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Geo Coordinates</span>
+<span class="font-metric-mono text-metric-mono text-on-surface font-semibold">31.9579Â° N</span>
+<span class="font-metric-mono text-metric-mono text-on-surface-variant font-medium">77.1095Â° E â€¢ Alt 1,220m</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">calendar_today</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Installation Date</span>
+<span class="font-title-sm text-title-sm text-on-surface">14 Oct 2025</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cycle Day 138 of Season</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base" style="font-variation-settings: 'FILL' 1;">shield</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Queen Status</span>
+<span class="font-title-sm text-title-sm text-on-surface truncate">Italian Buckfast</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Active (2nd Year Marked Yellow)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Header Actions -->
+<div class="flex flex-wrap xl:flex-col gap-space-xs z-10 justify-end shrink-0">
+<button id="btnCreateHarvest" class="bg-primary hover:bg-primary-container text-on-primary px-space-md py-2.5 rounded-lg flex items-center justify-center gap-2 font-label-lg text-label-lg shadow-sm transition-all"><span class="material-symbols-outlined text-base">add_circle</span><span>+ Create Harvest Record</span></button>
+<button id="btnRunAcoustics" class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-md py-2.5 rounded-lg flex items-center justify-center gap-2 font-label-lg text-label-lg transition-all"><span class="material-symbols-outlined text-base">graphic_eq</span><span>Run Acoustic Diagnostics</span></button>
+<button id="btnViewHistory" class="bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface px-space-md py-2 rounded-lg flex items-center justify-center gap-2 font-label-md text-label-md transition-all"><span class="material-symbols-outlined text-sm">history</span><span>View Historical Sensor Logs</span></button>
+</div>
+<!-- Ambient Backdrop Graphic -->
+<div class="absolute -right-6 -bottom-8 opacity-5 text-primary pointer-events-none hidden xl:block">
+<svg fill="currentColor" height="220" viewbox="0 0 100 100" width="220">
+<polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5"></polygon>
+</svg>
+</div>
+</div>
+<!-- AI Predictive Insight Highlight Card -->
+<div class="bg-gradient-to-r from-primary-container via-primary-container to-tertiary-container rounded-xl p-space-md text-on-primary shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md relative overflow-hidden">
+<div class="flex items-start gap-space-md z-10 max-w-4xl">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-widest bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded font-bold">AI Predictive Honey Maturation Engine</span>
+<span class="font-metric-mono text-metric-mono text-on-primary-container">Confidence 98.4%</span>
+</div>
+<p class="font-body-md text-body-md text-surface-bright leading-relaxed">
+<span class="font-semibold text-secondary-fixed">Optimal Harvest Window Detected:</span> Hive H-001 has entered peak nectar maturation stage. Moisture content estimated at <span class="font-metric-mono font-bold text-white">17.2%</span> based on thermodynamic curing curves. Recommended harvest window: within <span class="underline decoration-secondary-container font-semibold">48 to 72 hours</span> before forecasted valley rainfall.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0 z-10 w-full md:w-auto">
+<button id="btnPrepHarvest" class="flex-1 md:flex-initial bg-secondary hover:bg-on-secondary-container text-on-secondary px-space-md py-2.5 rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-1.5 shadow transition-all"><span class="material-symbols-outlined text-sm">inventory_2</span><span>Prep Harvest Batch</span></button>
+<button class="bg-surface-container-lowest/15 hover:bg-surface-container-lowest/25 text-white px-space-md py-2.5 rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-1.5 transition-all">
+<span class="material-symbols-outlined text-sm">event</span>
+            Schedule Inspection
+          </button>
+</div>
+<div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-secondary-container/10 pointer-events-none blur-2xl"></div>
+</div>
+<!-- Live Sensor Cards Grid (6 Metric Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-space-md">
+<!-- Temp -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-secondary">thermostat</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">Temperature</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">Safe</span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">35.1</span>
+<span class="font-title-md text-title-md text-on-surface-variant">Â°C</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Brood target: 34.5Â°Câ€“35.5Â°C</p>
+</div>
+<!-- Mini sparkline SVG -->
+<div class="pt-2">
+<svg class="w-full h-8 overflow-visible" fill="none" viewbox="0 0 100 25">
+<path d="M0,15 Q15,13 30,14 T60,11 T85,12 L100,12" fill="none" stroke="#1b4332" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="100" cy="12" fill="#1b4332" r="3"></circle>
+</svg>
+<div class="flex items-center justify-between text-on-surface-variant mt-1 font-metric-mono text-[11px]">
+<span>24h Min: 34.8Â°</span>
+<span>Max: 35.3Â°</span>
+</div>
+</div>
+</div>
+<!-- Humidity -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-on-tertiary-container">water_drop</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">Humidity</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">Optimal</span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">59</span>
+<span class="font-title-md text-title-md text-on-surface-variant">% RH</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Comb curing band: 55â€“65%</p>
+</div>
+<div class="pt-2">
+<svg class="w-full h-8 overflow-visible" fill="none" viewbox="0 0 100 25">
+<path d="M0,20 Q25,18 45,15 T75,10 L100,12" fill="none" stroke="#46b7aa" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="100" cy="12" fill="#46b7aa" r="3"></circle>
+</svg>
+<div class="flex items-center justify-between text-on-surface-variant mt-1 font-metric-mono text-[11px]">
+<span>-2.1% (Dehumidifying)</span>
+<span>Nectar Evap</span>
+</div>
+</div>
+</div>
+<!-- Hive Weight -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-secondary">scale</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">Comb Weight</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-semibold">Ripe</span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">46.8</span>
+<span class="font-title-md text-title-md text-on-surface-variant">kg</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary font-semibold mt-1">+4.2 kg gained (Last 6 days)</p>
+</div>
+<div class="pt-2">
+<svg class="w-full h-8 overflow-visible" fill="none" viewbox="0 0 100 25">
+<path d="M0,22 L20,19 L40,16 L65,11 L85,8 L100,6" fill="none" stroke="#904d00" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="100" cy="6" fill="#904d00" r="3"></circle>
+</svg>
+<div class="flex items-center justify-between text-on-surface-variant mt-1 font-metric-mono text-[11px]">
+<span>Tare: 14.5 kg</span>
+<span class="text-secondary font-semibold">Ready Super</span>
+</div>
+</div>
+</div>
+<!-- Acoustic Activity -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-primary">waves</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">Acoustics</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">Calm</span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">245</span>
+<span class="font-title-md text-title-md text-on-surface-variant">Hz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Queen piping absent | Normal hum</p>
+</div>
+<div class="pt-2">
+<div class="flex items-end gap-1 h-8 justify-between px-1">
+<span class="w-1.5 bg-primary-fixed-dim rounded-t h-3"></span>
+<span class="w-1.5 bg-primary-fixed-dim rounded-t h-4"></span>
+<span class="w-1.5 bg-primary rounded-t h-7"></span>
+<span class="w-1.5 bg-primary rounded-t h-6"></span>
+<span class="w-1.5 bg-primary-fixed-dim rounded-t h-3"></span>
+<span class="w-1.5 bg-primary-fixed-dim rounded-t h-2"></span>
+<span class="w-1.5 bg-primary-fixed-dim rounded-t h-4"></span>
+<span class="w-1.5 bg-primary rounded-t h-5"></span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant mt-1 font-metric-mono text-[11px]">
+<span>Swarm Risk: 3%</span>
+<span>FFT Peak</span>
+</div>
+</div>
+</div>
+<!-- Battery Power -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-primary">solar_power</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">Solar LiFePO4</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">96%</span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">3.82</span>
+<span class="font-title-md text-title-md text-on-surface-variant">V</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">+140 mA net solar float charge</p>
+</div>
+<div class="pt-2">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 96%"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant mt-2 font-metric-mono text-[11px]">
+<span>Cell Health: 99%</span>
+<span>Active Photons</span>
+</div>
+</div>
+</div>
+<!-- LoRaWAN Signal -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-primary">cell_tower</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">LoRa SF7</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-semibold">Strong</span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">-88</span>
+<span class="font-title-md text-title-md text-on-surface-variant">dBm</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">SNR: +9.2 dB | Gateway Mesh #04</p>
+</div>
+<div class="pt-2">
+<div class="flex items-center gap-1 h-3">
+<span class="w-2 h-2 rounded-sm bg-primary"></span>
+<span class="w-2 h-3 rounded-sm bg-primary"></span>
+<span class="w-2 h-4 rounded-sm bg-primary"></span>
+<span class="w-2 h-5 rounded-sm bg-primary"></span>
+<span class="w-2 h-6 rounded-sm bg-outline-variant"></span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant mt-2 font-metric-mono text-[11px]">
+<span>Packet Loss: 0.0%</span>
+<span>Ch 868.1</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Visual Analytics Split Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-space-lg">
+<!-- Telemetry Diurnal Cycle Chart (2 Columns Wide) -->
+<div class="xl:col-span-2 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-md">
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-on-surface font-bold">Hive Thermoregulation &amp; Net Foraging Curves</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Micro-climatic brood stability compared against ambient Himalayan mountain air</span>
+</div>
+<!-- Range Selector Tabs -->
+<div class="inline-flex bg-surface-container-low p-1 rounded-lg self-start sm:self-auto">
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md bg-surface-container-lowest text-primary shadow-sm font-semibold">Last 24 Hours</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md text-on-surface-variant hover:text-on-surface">7 Days</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md text-on-surface-variant hover:text-on-surface">30 Days</button>
+</div>
+</div>
+<!-- Chart Legend -->
+<div class="flex items-center flex-wrap gap-space-md py-2 text-label-sm font-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-primary-container"></span>
+<span class="text-on-surface">Hive Internal Brood Core (35.1Â°C Target)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-secondary-fixed-dim"></span>
+<span class="text-on-surface-variant">Ambient Air Temp (16Â°C â€“ 28Â°C)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 bg-secondary-container"></span>
+<span class="text-on-surface">Cumulative Super Weight (+1.2 kg net day gain)</span>
+</div>
+</div>
+<!-- Inline Technical SVG Chart with Dual Axis Representation -->
+<div class="relative w-full h-80 pt-4">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 280">
+<defs>
+<lineargradient id="broodGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#1b4332" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#1b4332" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="ambientGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#fe932c" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#fe932c" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Horizontal Lines -->
+<line stroke="#d9e3f6" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="760" y1="40" y2="40"></line>
+<line stroke="#d9e3f6" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="760" y1="90" y2="90"></line>
+<line stroke="#d9e3f6" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="760" y1="140" y2="140"></line>
+<line stroke="#d9e3f6" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="760" y1="190" y2="190"></line>
+<line stroke="#c1c8c2" stroke-width="1" x1="40" x2="760" y1="240" y2="240"></line>
+<!-- Y Axis Left Labels (Temperature) -->
+<text fill="#717973" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="32" y="44">40Â°C</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="32" y="94">35Â°C</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="32" y="144">28Â°C</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="32" y="194">20Â°C</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="11" text-anchor="end" x="32" y="244">15Â°C</text>
+<!-- Y Axis Right Labels (Weight in Kg) -->
+<text fill="#904d00" font-family="JetBrains Mono" font-size="11" text-anchor="start" x="768" y="44">47.5kg</text>
+<text fill="#904d00" font-family="JetBrains Mono" font-size="11" text-anchor="start" x="768" y="94">46.5kg</text>
+<text fill="#904d00" font-family="JetBrains Mono" font-size="11" text-anchor="start" x="768" y="144">45.5kg</text>
+<text fill="#904d00" font-family="JetBrains Mono" font-size="11" text-anchor="start" x="768" y="244">Tare</text>
+<!-- Ambient Mountain Temperature Fill Curve (Oscillates widely: 16Â°C at dawn to 27Â°C afternoon) -->
+<path d="M40,225 C120,235 220,180 320,145 C420,110 520,120 620,170 C680,205 720,230 760,235 L760,240 L40,240 Z" fill="url(#ambientGradient)"></path>
+<path d="M40,225 C120,235 220,180 320,145 C420,110 520,120 620,170 C680,205 720,230 760,235" fill="none" stroke="#fe932c" stroke-dasharray="4,4" stroke-width="2"></path>
+<!-- Hive Internal Temperature Fill Area (Rock Solid 35Â°C regulated by bee wing fanning) -->
+<path d="M40,90 C120,91 220,89 320,90 C420,91 520,90 620,89 C680,90 720,90 760,91 L760,240 L40,240 Z" fill="url(#broodGradient)"></path>
+<path d="M40,90 C120,91 220,89 320,90 C420,91 520,90 620,89 C680,90 720,90 760,91" fill="none" stroke="#012d1d" stroke-width="2.5"></path>
+<!-- Weight Step Profile (Foragers leave at dawn: slight dip, return loaded with mustard pollen afternoon) -->
+<path d="M40,115 C100,115 160,125 220,130 C300,120 400,95 500,82 C600,74 680,68 760,65" fill="none" stroke="#904d00" stroke-width="2"></path>
+<!-- Data callout marker on the Hive core line -->
+<circle cx="500" cy="82" fill="#fe932c" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<rect fill="#012d1d" height="28" rx="4" width="110" x="445" y="42"></rect>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="500" y="60">+1.2 kg peak honey</text>
+<!-- X Axis Time markers -->
+<text fill="#717973" font-family="JetBrains Mono" font-size="10" x="50" y="260">00:00 (Night)</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="10" x="210" y="260">06:00 (Dawn)</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="10" x="390" y="260">12:00 (Noon Sun)</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="10" x="570" y="260">18:00 (Sunset)</text>
+<text fill="#717973" font-family="JetBrains Mono" font-size="10" x="730" y="260">23:59</text>
+</svg>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pt-space-md border-t-0 bg-surface-container-low p-space-sm rounded-lg mt-space-sm gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">nature_people</span>
+<span class="font-body-sm text-body-sm text-on-surface">Field observation: Colony exhibiting intense Acacia forage flights; 88 bees/min transit rate at flight entrance.</span>
+</div>
+<span class="font-metric-mono text-metric-mono text-primary font-semibold whitespace-nowrap">Comb Curing Factor: 94.2%</span>
+</div>
+</div>
+<!-- Right Side: Field Photo & Super Inspection Snapshot -->
+<div class="flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">photo_camera</span>
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Hive Inspection Frame Cam</span>
+</div>
+<span class="font-metric-mono text-metric-mono bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant text-xs">Today 11:30 AM</span>
+</div>
+<div class="relative rounded-lg overflow-hidden h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close-up macro shot of healthy honeybees actively filling hexagonal golden wax comb cells with shimmering translucent nectar, natural sunlight filtering across the wooden hive frame, warm organic tones of amber, gold, and deep natural wood with sharp focus on bee anatomy and capped honey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYChAH1Lx0BJOPyiqiUvAiey_-vz6JlFwudyrf_UR-GUdeOrZRj2zwbFbGnLR9TsSQA3aSKxv5Ffw_8hGlYjSQGAoW140vcA0JvqY3sqrww-ZQyRVGV2jHTPet9VIOvvthulWbis2WhmquNy-Q1O0XSZLfbhC-uxfzIZHFdr0QFD_TSfiKeWTIj55WglrqellUHyDFZrfjQeIEqLelza_ag1B4eRBgHPWvF0UVB8WlZ82QxAzQkWQe"/>
+<div class="absolute bottom-2 left-2 bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface px-2 py-1 rounded text-xs font-metric-mono flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+<span>Frame 07 â€¢ 92% Honey Capping Complete</span>
+</div>
+</div>
+<div class="mt-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Capped Honey Maturity</span>
+<span class="font-metric-mono font-semibold text-primary">92%</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 92%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-body-sm text-on-surface-variant mt-1">
+<span>Brood Area: <strong class="text-on-surface">Uniform Solid Pattern</strong></span>
+<span>Varroa Mite Load: <strong class="text-primary">&lt; 0.2% (Low)</strong></span>
+</div>
+</div>
+</div>
+<!-- Queen Vitality & Phenotype Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Queen Biometrics &amp; Brood Pacing</span>
+<span class="material-symbols-outlined text-secondary-container text-sm">stars</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-low p-2 rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Egg Laying Cadence</span>
+<span class="font-metric-mono text-title-md text-on-surface font-bold">~1,850</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">eggs / 24 hr peak</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Queen Pheromone</span>
+<span class="font-metric-mono text-title-md text-primary font-bold">High (9-ODA)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Colony cohesiveness</span>
+</div>
+</div>
+<div class="mt-space-sm p-space-sm bg-primary-fixed/20 rounded-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-base">verified_user</span>
+<p class="font-body-sm text-body-sm text-primary leading-tight">
+                Genetic Tag: <strong>BUCK-IT-24-9102</strong>. Marked yellow dot intact. High hygienic grooming index detected via audio spectrum.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Hardware & Communication Architecture Visual -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">IoT Field Telemetry &amp; Provenance Pipeline</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time edge telemetry ingest from brood box to immutable ledger record</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="font-metric-mono text-metric-mono text-primary font-semibold">End-to-End Pipeline Active</span>
+</div>
+</div>
+<!-- Pipeline Graphic Container -->
+<div class="relative bg-surface-container-low rounded-xl p-space-lg overflow-x-auto">
+<div class="min-w-[840px] flex items-center justify-between relative">
+<!-- Continuous Connecting Conduit Line -->
+<div class="absolute left-10 right-10 top-1/2 -translate-y-1/2 h-1 bg-surface-variant rounded-full -z-0"></div>
+<!-- Animated Flow Packet -->
+<div class="absolute left-10 right-10 top-1/2 -translate-y-1/2 h-1 bg-gradient-to-r from-primary via-tertiary-fixed to-primary-fixed rounded-full -z-0 opacity-80"></div>
+<!-- Step 1: Probe -->
+<div class="flex flex-col items-center text-center gap-2 z-10 w-44">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-lowest shadow-md flex items-center justify-center text-primary group hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl text-primary">sensors</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Multi-Sensor Probe</span>
+<span class="font-metric-mono text-xs text-on-surface-variant mt-0.5">DS18B20 + SHT31</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">Internal Core + Load Cell</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">Sampling 10s</span>
+</div>
+<!-- Connector Pulse Indicator -->
+<div class="z-10 -my-4">
+<span class="material-symbols-outlined text-primary animate-pulse text-xl">arrow_forward</span>
+</div>
+<!-- Step 2: Solar LoRa Node -->
+<div class="flex flex-col items-center text-center gap-2 z-10 w-44">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-lowest shadow-md flex items-center justify-center text-primary group hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl text-secondary">solar_power</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Solar LoRaWAN Node</span>
+<span class="font-metric-mono text-xs text-on-surface-variant mt-0.5">868 MHz ISM Band</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Class A End-Device</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">SF7 Payload 32B</span>
+</div>
+<!-- Connector Pulse Indicator -->
+<div class="z-10 -my-4">
+<span class="material-symbols-outlined text-primary animate-pulse text-xl">arrow_forward</span>
+</div>
+<!-- Step 3: Base Station Gateway -->
+<div class="flex flex-col items-center text-center gap-2 z-10 w-44">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-lowest shadow-md flex items-center justify-center text-primary group hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl text-primary">router</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Base Gateway</span>
+<span class="font-metric-mono text-xs text-on-surface-variant mt-0.5">5km LoRa Line-of-Sight</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">4G/LTE Backhaul</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">99.9% Uptime</span>
+</div>
+<!-- Connector Pulse Indicator -->
+<div class="z-10 -my-4">
+<span class="material-symbols-outlined text-primary animate-pulse text-xl">arrow_forward</span>
+</div>
+<!-- Step 4: HoneyChain Cloud Engine -->
+<div class="flex flex-col items-center text-center gap-2 z-10 w-44">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-lowest shadow-md flex items-center justify-center text-primary group hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl text-tertiary">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">HoneyChain Cloud</span>
+<span class="font-metric-mono text-xs text-on-surface-variant mt-0.5">MQTT Broker â€¢ InfluxDB</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Immutable Hashes</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-semibold">Zero Packet Drop</span>
+</div>
+<!-- Connector Pulse Indicator -->
+<div class="z-10 -my-4">
+<span class="material-symbols-outlined text-primary animate-pulse text-xl">arrow_forward</span>
+</div>
+<!-- Step 5: Edge AI Anomaly Engine -->
+<div class="flex flex-col items-center text-center gap-2 z-10 w-44">
+<div class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary shadow-md flex items-center justify-center group hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl text-secondary-container">psychology</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Edge AI Diagnostic</span>
+<span class="font-metric-mono text-xs text-on-surface-variant mt-0.5">Acoustic &amp; Weight AI</span>
+<span class="font-body-sm text-body-sm text-primary font-semibold">Curing Inference</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-semibold">Inference 1.4s</span>
+</div>
+</div>
+</div>
+<!-- System Architecture Footnote Telemetry Bar -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm bg-surface-container-low p-space-sm rounded-lg text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">data_object</span>
+<span class="font-body-sm text-body-sm">Last Hash Imprint: <span class="font-metric-mono text-primary font-semibold">0x4a9f...e102</span></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">lock_clock</span>
+<span class="font-body-sm text-body-sm">Cryptographic Signature: <span class="font-metric-mono text-on-surface font-semibold">Ed25519 Verified</span></span>
+</div>
+<div class="flex items-center gap-2 justify-start md:justify-end">
+<span class="material-symbols-outlined text-sm text-secondary">memory</span>
+<span class="font-body-sm text-body-sm">Firmware: <span class="font-metric-mono text-on-surface font-semibold">v3.4.1-honey-secure</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div><!-- Telemetry Specific Modals -->
+<!-- 1. Acoustic Diagnostics Modal -->
+<div id="acoustic-diagnostics-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4">
+  <div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-lg w-full p-6 border border-surface-variant flex flex-col gap-4 relative">
+    <button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container" onclick="HoneyAudio.stopHum(); HoneyModal.close('acoustic-diagnostics-modal');">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-2xl">graphic_eq</span>
+      </div>
+      <div>
+        <h3 class="font-headline-sm text-headline-sm text-primary font-bold">Bio-Acoustic Frequency Analyzer</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">Real-time Colony Audio Synthesis &amp; FFT Spectrogram</p>
+      </div>
+    </div>
+
+    <!-- Live Animated Waveform Canvas -->
+    <div class="relative w-full h-44 rounded-xl bg-[#012d1d] flex flex-col items-center justify-center overflow-hidden border border-primary-fixed/30 p-2">
+      <canvas id="audioCanvas" width="440" height="150" class="w-full h-full"></canvas>
+      <div class="absolute top-2 left-3 flex items-center gap-2 font-metric-mono text-xs text-primary-fixed">
+        <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+        <span id="audioFreqLabel">Frequency: 240 Hz (Calm Foraging Worker Hum)</span>
+      </div>
+      <div class="absolute bottom-2 right-3 font-metric-mono text-[11px] text-white/60">
+        Sampling: 44.1 kHz • 24-Bit ADC
+      </div>
+    </div>
+
+    <!-- Diagnostic Findings -->
+    <div class="p-3.5 rounded-xl bg-surface-container-low space-y-1">
+      <div class="flex justify-between items-center text-xs font-semibold">
+        <span class="text-primary">Colony Acoustic Diagnosis</span>
+        <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary text-[11px]">99.1% Confidence</span>
+      </div>
+      <p class="text-xs text-on-surface-variant">
+        Harmonic spectrum matches steady worker hive fanning. Zero queen piping or early-swarming ultrasonic peaks detected.
+      </p>
+    </div>
+
+    <!-- Audio Synthesizer Controls -->
+    <div class="grid grid-cols-2 gap-2 pt-1">
+      <button id="btnPlayWorkerHum" class="h-11 px-3 bg-primary text-on-primary font-semibold text-xs rounded-lg hover:bg-primary-container flex items-center justify-center gap-2 shadow">
+        <span class="material-symbols-outlined text-base">play_circle</span>
+        <span>Play Worker Hum (240Hz)</span>
+      </button>
+      <button id="btnPlayQueenPiping" class="h-11 px-3 bg-secondary text-on-secondary font-semibold text-xs rounded-lg hover:opacity-90 flex items-center justify-center gap-2 shadow">
+        <span class="material-symbols-outlined text-base">warning</span>
+        <span>Play Queen Piping (310Hz)</span>
+      </button>
+    </div>
+
+    <div class="flex justify-end pt-2 border-t border-surface-variant">
+      <button class="px-4 py-2 bg-surface-container hover:bg-surface-container-high rounded-lg text-xs font-semibold text-on-surface" onclick="HoneyAudio.stopHum(); HoneyModal.close('acoustic-diagnostics-modal');">
+        Stop Audio &amp; Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Historical Logs Modal -->
+<div id="historical-logs-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4">
+  <div class="bg-surface-container-lowest rounded-2xl shadow-2xl max-w-2xl w-full p-6 border border-surface-variant flex flex-col gap-4 relative max-h-[90vh] overflow-y-auto">
+    <button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container" onclick="HoneyModal.close('historical-logs-modal')">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="flex items-center justify-between pb-2 border-b border-surface-variant">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-2xl">history</span>
+        </div>
+        <div>
+          <h3 class="font-headline-sm text-headline-sm text-primary font-bold">24-Hour Telemetry Audit Log</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Smart Hive H-001 • LoRaWAN Mesh Ingest</p>
+        </div>
+      </div>
+      <span class="font-metric-mono text-xs bg-primary-fixed text-primary px-2.5 py-1 rounded-full font-bold">144 Packets</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead class="bg-surface-container text-on-surface-variant uppercase font-metric-mono">
+          <tr>
+            <th class="p-2.5">Time (IST)</th>
+            <th class="p-2.5">Brood Temp</th>
+            <th class="p-2.5">Humidity</th>
+            <th class="p-2.5">Gross Wt</th>
+            <th class="p-2.5">Acoustics</th>
+            <th class="p-2.5">LoRa RSSI</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-container-low font-metric-mono">
+          <tr class="hover:bg-surface-container-low">
+            <td class="p-2.5 font-semibold text-primary">11:30:14</td>
+            <td class="p-2.5">35.1 °C</td>
+            <td class="p-2.5">58.4 %</td>
+            <td class="p-2.5">44.20 kg</td>
+            <td class="p-2.5">240 Hz</td>
+            <td class="p-2.5">-88 dBm</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low">
+            <td class="p-2.5 font-semibold text-primary">11:20:12</td>
+            <td class="p-2.5">35.0 °C</td>
+            <td class="p-2.5">58.6 %</td>
+            <td class="p-2.5">44.18 kg</td>
+            <td class="p-2.5">238 Hz</td>
+            <td class="p-2.5">-89 dBm</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low">
+            <td class="p-2.5 font-semibold text-primary">11:10:08</td>
+            <td class="p-2.5">35.2 °C</td>
+            <td class="p-2.5">58.2 %</td>
+            <td class="p-2.5">44.15 kg</td>
+            <td class="p-2.5">242 Hz</td>
+            <td class="p-2.5">-88 dBm</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low">
+            <td class="p-2.5 font-semibold text-primary">11:00:15</td>
+            <td class="p-2.5">35.1 °C</td>
+            <td class="p-2.5">58.5 %</td>
+            <td class="p-2.5">44.10 kg</td>
+            <td class="p-2.5">239 Hz</td>
+            <td class="p-2.5">-90 dBm</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low">
+            <td class="p-2.5 font-semibold text-primary">10:50:20</td>
+            <td class="p-2.5">34.9 °C</td>
+            <td class="p-2.5">59.0 %</td>
+            <td class="p-2.5">44.05 kg</td>
+            <td class="p-2.5">241 Hz</td>
+            <td class="p-2.5">-91 dBm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pt-3 border-t border-surface-variant flex justify-between items-center">
+      <span class="text-xs text-on-surface-variant font-metric-mono">Hash signature verified by SHA-256</span>
+      <button class="px-4 py-2 text-xs bg-primary text-on-primary font-semibold rounded-lg hover:bg-primary-container" onclick="HoneyToast('CSV telemetry archive downloaded', 'success'); HoneyModal.close('historical-logs-modal');">
+        Export Full 24h CSV
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Parse query parameter ?hive=H-001
+    const params = new URLSearchParams(window.location.search);
+    const hiveId = params.get('hive') || 'H-001';
+    const hive = HoneyDataStore.getHiveById(hiveId);
+
+    // Update Page Header if other hive is selected
+    if (hive) {
+      const titleEl = document.querySelector('h1.font-headline-lg');
+      if (titleEl) {
+        titleEl.innerHTML = 'Hive ' + hive.id + ' <span class="text-on-surface-variant font-title-lg font-normal">(' + (hive.name || 'Apis cerana') + ')</span>';
+      }
+      const breadcrumbChip = Array.from(document.querySelectorAll('.font-metric-mono')).find(el => el.textContent.includes('H-001') || el.classList.contains('bg-surface-container-high'));
+      if (breadcrumbChip) breadcrumbChip.textContent = hive.id;
+
+      // Update Beekeeper meta
+      const beekeeperVal = Array.from(document.querySelectorAll('span.font-title-sm')).find(s => s.textContent.includes('Patel') || s.textContent.includes('Ramdas'));
+      if (beekeeperVal) beekeeperVal.textContent = hive.beekeeper;
+    }
+
+    // "Poll Now" simulation
+    const btnPoll = document.getElementById('btnPollNow');
+    const pollIcon = document.getElementById('pollIcon');
+    const syncStatusEl = document.querySelector('.bg-primary-fixed\/40 span.font-metric-mono');
+
+    if (btnPoll) {
+      btnPoll.addEventListener('click', () => {
+        if (pollIcon) pollIcon.classList.add('animate-spin');
+        btnPoll.disabled = true;
+
+        setTimeout(() => {
+          if (pollIcon) pollIcon.classList.remove('animate-spin');
+          btnPoll.disabled = false;
+
+          // Minor jitter
+          const tempDelta = (Math.random() * 0.2 - 0.1).toFixed(1);
+          const weightDelta = (Math.random() * 0.08).toFixed(2);
+          const newTemp = (35.1 + parseFloat(tempDelta)).toFixed(1);
+          const newWeight = (44.2 + parseFloat(weightDelta)).toFixed(1);
+
+          // Update UI card values
+          const tempEl = document.querySelector('.grid .font-headline-lg');
+          if (tempEl) tempEl.textContent = newTemp;
+
+          if (syncStatusEl) {
+            syncStatusEl.textContent = 'Mesh Node 0x7F21: SYNCED (just now)';
+          }
+
+          HoneyToast('LoRa packet received for Hive ' + hiveId + ': Temp ' + newTemp + '°C, RSSI -86 dBm (SNR +9.8 dB)', 'success');
+        }, 700);
+      });
+    }
+
+    // "+ Create Harvest Record" and "Prep Harvest Batch"
+    document.getElementById('btnCreateHarvest')?.addEventListener('click', () => {
+      window.location.href = 'harvest-batch.html?hive=' + encodeURIComponent(hiveId);
+    });
+    document.getElementById('btnPrepHarvest')?.addEventListener('click', () => {
+      window.location.href = 'harvest-batch.html?hive=' + encodeURIComponent(hiveId);
+    });
+
+    // Run Acoustic Diagnostics modal
+    document.getElementById('btnRunAcoustics')?.addEventListener('click', () => {
+      HoneyModal.open('acoustic-diagnostics-modal');
+      startWaveformAnimation();
+    });
+
+    document.getElementById('btnViewHistory')?.addEventListener('click', () => {
+      HoneyModal.open('historical-logs-modal');
+    });
+
+    // Bio-acoustic controls
+    document.getElementById('btnPlayWorkerHum')?.addEventListener('click', () => {
+      HoneyAudio.playHum(240, 'worker');
+      const label = document.getElementById('audioFreqLabel');
+      if (label) label.textContent = 'Frequency: 240 Hz (Calm Foraging Worker Hum - Active)';
+      HoneyToast('Playing synthesized worker bee acoustic hum (240 Hz)', 'info');
+    });
+
+    document.getElementById('btnPlayQueenPiping')?.addEventListener('click', () => {
+      HoneyAudio.playHum(310, 'queen');
+      const label = document.getElementById('audioFreqLabel');
+      if (label) label.textContent = 'Frequency: 310 Hz (Elevated Queen Piping Alert - Active)';
+      HoneyToast('Playing synthesized queen piping tone (310 Hz)', 'warning');
+    });
+
+    // Waveform Animation on Canvas
+    let animId = null;
+    function startWaveformAnimation() {
+      const canvas = document.getElementById('audioCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let step = 0;
+
+      function render() {
+        ctx.fillStyle = '#012d1d';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#6bd8cb';
+        ctx.beginPath();
+
+        const sliceWidth = canvas.width / 80;
+        let x = 0;
+
+        for (let i = 0; i < 80; i++) {
+          const v = Math.sin(step + i * 0.2) * (HoneyAudio.isPlaying ? 35 : 12) + Math.cos(step * 0.5 + i * 0.1) * (HoneyAudio.isPlaying ? 20 : 5);
+          const y = canvas.height / 2 + v;
+
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+
+          x += sliceWidth;
+        }
+
+        ctx.stroke();
+        step += HoneyAudio.isPlaying ? 0.25 : 0.08;
+
+        const modal = document.getElementById('acoustic-diagnostics-modal');
+        if (modal && !modal.classList.contains('hidden')) {
+          animId = requestAnimationFrame(render);
+        }
+      }
+      render();
+    }
+  });
+</script>
+</body></html>

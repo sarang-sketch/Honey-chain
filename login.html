@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+  <title>Honey Chain | Secure Gateway & Role Verification</title><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-dim":"#d0dbed","on-error-container":"#93000a","primary-fixed":"#c1ecd4","inverse-on-surface":"#eaf1ff","on-primary-container":"#86af99","on-primary":"#ffffff","surface-variant":"#d9e3f6","outline":"#717973","on-tertiary":"#ffffff","error-container":"#ffdad6","surface-container-highest":"#d9e3f6","inverse-surface":"#27313f","on-error":"#ffffff","surface-container-high":"#dee9fc","outline-variant":"#c1c8c2","tertiary-fixed":"#89f5e7","primary-fixed-dim":"#a5d0b9","on-tertiary-fixed-variant":"#005049","on-secondary-fixed":"#2f1500","inverse-primary":"#a5d0b9","tertiary-container":"#00443e","surface-tint":"#3f6653","on-background":"#121c2a","on-secondary-container":"#663500","tertiary":"#002c28","on-primary-fixed":"#002114","surface-container-lowest":"#ffffff","surface-bright":"#f8f9ff","primary":"#012d1d","secondary":"#904d00","secondary-fixed":"#ffdcc3","error":"#ba1a1a","surface-container-low":"#eff4ff","primary-container":"#1b4332","on-tertiary-container":"#46b7aa","on-secondary":"#ffffff","on-primary-fixed-variant":"#274e3d","secondary-fixed-dim":"#ffb77d","tertiary-fixed-dim":"#6bd8cb","on-surface":"#121c2a","on-tertiary-fixed":"#00201d","on-secondary-fixed-variant":"#6e3900","background":"#f8f9ff","surface-container":"#e6eeff","surface":"#f8f9ff","secondary-container":"#fe932c","on-surface-variant":"#414844"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xl":"2.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-mobile":"1rem","gutter":"1.5rem"},fontFamily:{"title-sm":["Inter"],"metric-mono":["JetBrains Mono"],"label-md":["Inter"],"headline-xl":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-sm":["Inter"],"title-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"title-lg":["Plus Jakarta Sans"],"body-sm":["Inter"],"body-lg":["Inter"]},fontSize:{"title-sm":["14px",{"lineHeight":"20px","fontWeight":"600"}],"metric-mono":["13px",{"lineHeight":"18px","fontWeight":"500"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-xl-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"title-lg":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><main class="w-full bg-surface min-h-screen flex items-center justify-center"><div class="flex flex-col w-full">
+<div class="w-full relative overflow-hidden py-10 px-4 sm:px-6 lg:px-12 flex justify-center items-center">
+<!-- Ambient Organic Background Geometry -->
+<div class="absolute inset-0 pointer-events-none opacity-40">
+<svg class="w-full h-full text-surface-container" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="97" id="hex-pattern" patterntransform="scale(1)" patternunits="userSpaceOnUse" width="56">
+<path d="M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 48.5 L56 64.66 L56 97 L28 113.16 L0 97 L0 64.66 Z" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.2"></path>
+</pattern>
+</defs>
+<rect fill="url(#hex-pattern)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<!-- Soft Brand Ambient Glows -->
+<div class="absolute -top-24 -left-20 w-96 h-96 bg-primary-fixed opacity-40 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -right-20 w-96 h-96 bg-secondary-fixed opacity-35 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative w-full max-w-7xl flex flex-col gap-8">
+<!-- Top Meta Utility Bar -->
+<div class="flex flex-wrap items-center justify-between gap-4 px-2">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+            v2.4 AgriTech Initiative
+          </span>
+<span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">verified_user</span>
+            KVIC &amp; Ministry of Agriculture Partnered Node
+          </span>
+</div>
+<!-- Grassroots Language Bar -->
+<div class="flex items-center bg-surface-container-low rounded-full p-1 shadow-sm">
+<span class="material-symbols-outlined text-outline ml-2 mr-1 text-[18px]">translate</span>
+<div class="flex items-center gap-1">
+<button class="lang-btn px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-primary text-on-primary transition-all" type="button">English</button>
+<button class="lang-btn px-2.5 py-1 rounded-full text-label-sm font-label-sm text-on-surface hover:bg-surface-variant transition-all" type="button">à¤¹à¤¿à¤¨à¥à¤¦à¥€</button>
+<button class="lang-btn px-2.5 py-1 rounded-full text-label-sm font-label-sm text-on-surface hover:bg-surface-variant transition-all" type="button">à¤®à¤°à¤¾à¤ à¥€</button>
+<button class="lang-btn px-2.5 py-1 rounded-full text-label-sm font-label-sm text-on-surface hover:bg-surface-variant transition-all" type="button">à²•à²¨à³à²¨à²¡</button>
+</div>
+</div>
+</div>
+<!-- Main Gateway Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+<!-- Left Side: Brand Narrative & Mission Context -->
+<div class="lg:col-span-5 bg-gradient-to-br from-primary to-primary-container p-8 lg:p-12 flex flex-col justify-between text-on-primary relative overflow-hidden">
+<div class="absolute -right-16 -bottom-16 w-64 h-64 bg-tertiary-container rounded-full opacity-30 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-8">
+<!-- Brand Badge -->
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container-lowest/15 flex items-center justify-center text-primary-fixed shadow-inner">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">hive</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md tracking-tight text-on-primary leading-none">Honey Chain</h2>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider mt-1">National Apiculture Ledger</p>
+</div>
+</div>
+<!-- Main Philosophy Statement -->
+<div class="space-y-4 pt-2">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container-lowest/10 font-metric-mono text-metric-mono text-primary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                PROVENANCE ARCHITECTURE
+              </div>
+<h1 class="font-headline-lg text-headline-lg text-on-primary leading-tight font-bold">
+                Immutable truth from forest blossom to household jar.
+              </h1>
+<p class="font-body-md text-body-md text-primary-fixed-dim leading-relaxed">
+                "IoT monitors the hive, AI understands the data, blockchain protects the history, and QR shows the journey."
+              </p>
+</div>
+<!-- Micro Metrics Bento -->
+<div class="grid grid-cols-2 gap-3 pt-2">
+<div class="p-3.5 rounded-lg bg-surface-container-lowest/10">
+<div class="flex items-center gap-1.5 text-primary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">sensors</span>
+                  Active Apiary Nodes
+                </div>
+<div class="font-headline-sm text-headline-sm text-on-primary mt-1">14,892</div>
+<div class="font-label-sm text-label-sm text-primary-fixed-dim">Across 22 States</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-lowest/10">
+<div class="flex items-center gap-1.5 text-secondary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                  Pure Harvest Batches
+                </div>
+<div class="font-headline-sm text-headline-sm text-on-primary mt-1">2.41M kg</div>
+<div class="font-label-sm text-label-sm text-primary-fixed-dim">Zero Adulteration</div>
+</div>
+</div>
+</div>
+<!-- Bottom Field Imagery Card -->
+<div class="relative z-10 pt-8 mt-6">
+<div class="relative rounded-lg overflow-hidden h-36 bg-surface-container-highest shadow-md">
+<img class="w-full h-full object-cover object-center" data-alt="An Indian tribal beekeeper in safe protective gear inspecting a healthy modern beehive bathed in gentle morning sunlight, surrounded by natural mustard field blooms with rich earthy forest tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdd55gT1VxAueTE1RiG10B_r3jH5jx2bxPw6chj3v9-lu9r4kKiDutoxrqQBy0TGWOZo9GCxA32gHP-4yLfe29zEG3ZWfZ8gykD1bjlrDGTk-Zws92IiTsg0tOVWX4otcvgyP1es2eRPgiMbEn7iOse4W1p8vApEh6Et9pDwW-crW86K-3u1JpyVje1Aeky70vDR5s0HULsFnVYDF5-8CEe11t_x9L2dTmBrpuwo2XK7Guv2jvICvk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent flex items-end p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm text-on-primary">Certified Beekeeping Cluster #KA-419</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Role Selector & Auth Form -->
+<div class="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-surface-container-lowest">
+<div>
+<!-- Header of Form Section -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 gap-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Select Ecosystem Portal</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Choose your authorized operational entity to proceed</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-metric-mono text-metric-mono px-2.5 py-1 rounded bg-surface-container-high text-primary font-semibold">
+                  NODE: IND-PROV-90
+                </span>
+</div>
+</div>
+<!-- Role Selector Strip (5-Role Bespoke Architecture) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-6" id="roleContainer">
+<!-- 1. Beekeeper (Default Active) -->
+<button class="role-card active flex flex-col items-start p-3 rounded-lg bg-surface-container-low text-left transition-all relative overflow-hidden group shadow-sm" data-role="Rural Beekeeper (FPO Partner)" type="button">
+<div class="w-8 h-8 rounded-md bg-primary-container text-on-primary flex items-center justify-center mb-2 role-icon-box transition-colors">
+<span class="material-symbols-outlined text-[19px]">hive</span>
+</div>
+<div class="font-title-sm text-title-sm text-on-surface group-hover:text-primary">Beekeeper</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight mt-1 line-clamp-2">Log harvests, hive IoT &amp; AI alerts</div>
+<div class="role-indicator absolute bottom-0 left-0 right-0 h-1 bg-primary"></div>
+</button>
+<!-- 2. Processor -->
+<button class="role-card flex flex-col items-start p-3 rounded-lg bg-surface-container text-left transition-all relative overflow-hidden group" data-role="Processing Plant &amp; Packaging Facility" type="button">
+<div class="w-8 h-8 rounded-md bg-surface-variant text-on-surface flex items-center justify-center mb-2 role-icon-box transition-colors">
+<span class="material-symbols-outlined text-[19px]">precision_manufacturing</span>
+</div>
+<div class="font-title-sm text-title-sm text-on-surface group-hover:text-primary">Processor</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight mt-1 line-clamp-2">Track batches, processing &amp; lots</div>
+<div class="role-indicator absolute bottom-0 left-0 right-0 h-1 bg-transparent"></div>
+</button>
+<!-- 3. Testing Lab -->
+<button class="role-card flex flex-col items-start p-3 rounded-lg bg-surface-container text-left transition-all relative overflow-hidden group" data-role="Accredited Testing Laboratory (NMR &amp; Pollen)" type="button">
+<div class="w-8 h-8 rounded-md bg-surface-variant text-on-surface flex items-center justify-center mb-2 role-icon-box transition-colors">
+<span class="material-symbols-outlined text-[19px]">biotech</span>
+</div>
+<div class="font-title-sm text-title-sm text-on-surface group-hover:text-primary">Testing Lab</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight mt-1 line-clamp-2">NMR fingerprint &amp; purity scan</div>
+<div class="role-indicator absolute bottom-0 left-0 right-0 h-1 bg-transparent"></div>
+</button>
+<!-- 4. Government / KVIC -->
+<button class="role-card flex flex-col items-start p-3 rounded-lg bg-surface-container text-left transition-all relative overflow-hidden group" data-role="Government Regulatory &amp; KVIC Field Auditor" type="button">
+<div class="w-8 h-8 rounded-md bg-surface-variant text-on-surface flex items-center justify-center mb-2 role-icon-box transition-colors">
+<span class="material-symbols-outlined text-[19px]">account_balance</span>
+</div>
+<div class="font-title-sm text-title-sm text-on-surface group-hover:text-primary">Gov / KVIC</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight mt-1 line-clamp-2">Cluster subsidies &amp; certification</div>
+<div class="role-indicator absolute bottom-0 left-0 right-0 h-1 bg-transparent"></div>
+</button>
+<!-- 5. Consumer / Buyer -->
+<button class="role-card col-span-2 sm:col-span-1 flex flex-col items-start p-3 rounded-lg bg-surface-container text-left transition-all relative overflow-hidden group" data-role="Consumer &amp; Retail Verifier" type="button">
+<div class="w-8 h-8 rounded-md bg-surface-variant text-on-surface flex items-center justify-center mb-2 role-icon-box transition-colors">
+<span class="material-symbols-outlined text-[19px]">qr_code_scanner</span>
+</div>
+<div class="font-title-sm text-title-sm text-on-surface group-hover:text-primary">Consumer</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight mt-1 line-clamp-2">Jar verification &amp; bee origin</div>
+<div class="role-indicator absolute bottom-0 left-0 right-0 h-1 bg-transparent"></div>
+</button>
+</div>
+<!-- Active Selected Role Dynamic Banner -->
+<div class="p-3 mb-6 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">badge</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider shrink-0">Logging In As:</span>
+<span class="font-title-sm text-title-sm text-primary font-bold truncate" id="currentRoleTitle">Rural Beekeeper (FPO Partner)</span>
+</div>
+<span class="font-metric-mono text-[11px] text-primary bg-primary-fixed px-2 py-0.5 rounded-full shrink-0 font-medium">Auth Node 01</span>
+</div>
+<!-- Authentication Form Fields -->
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<!-- Input 1: Field Accessible Identifier -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Registered Mobile Number / Aadhaar / Email</label>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Aadhaar Linked FPO</span>
+</div>
+<div class="flex rounded-lg overflow-hidden bg-surface-container shadow-inner">
+<!-- Country Flag Badge -->
+<div class="flex items-center gap-1.5 px-3 bg-surface-container-high text-on-surface text-label-md font-label-md select-none">
+<span class="text-base">ðŸ‡®ðŸ‡³</span>
+<span class="font-metric-mono text-metric-mono font-bold">+91</span>
+</div>
+<!-- Input Box -->
+<input class="w-full h-11 px-3.5 bg-surface-container text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-colors" placeholder="Enter 10-digit mobile or 12-digit Aadhaar UID" type="text" value="98452 11048"/>
+</div>
+</div>
+<!-- Input 2: OTP / Password Toggle Segment -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Security Verification</label>
+<div class="inline-flex p-0.5 bg-surface-container-high rounded-full">
+<button class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-primary text-on-primary transition-all" id="toggleOtp" type="button">Mobile OTP</button>
+<button class="px-2 py-0.5 rounded-full text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="togglePass" type="button">Password</button>
+</div>
+</div>
+<button class="font-label-sm text-label-sm text-primary font-semibold hover:underline" type="button">Resend OTP in 0:42</button>
+</div>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-3.5 pr-28 rounded-lg bg-surface-container text-on-surface font-metric-mono text-body-md tracking-wider focus:bg-surface-container-lowest focus:outline-none transition-colors shadow-inner" id="authSecretInput" placeholder="Enter 6-digit Verification OTP" type="text" value="739 204"/>
+<div class="absolute right-2 flex items-center gap-1">
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded bg-primary-fixed text-primary font-semibold hover:bg-primary hover:text-on-primary transition-colors" type="button">
+                      Auto-Fill
+                    </button>
+</div>
+</div>
+</div>
+<!-- Terminal Remember & Help Links -->
+<div class="flex items-center justify-between pt-1">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-0 bg-surface-container" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Remember terminal on field gateway</span>
+</label>
+<a class="font-label-sm text-label-sm text-primary font-medium hover:underline cursor-pointer" onclick="HoneyToast('Terminal diagnostic: LoRa mesh healthy, GPS lock acquired, battery 94%', 'info')">Device Diagnostic?</a>
+</div>
+<!-- Action Segment -->
+<div class="pt-3 flex flex-col gap-3">
+<button class="w-full h-12 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg" type="submit">
+<span class="material-symbols-outlined text-[20px]">login</span>
+                  Access Portal
+                </button>
+<div class="relative flex py-1 items-center">
+<div class="flex-grow h-px bg-surface-variant"></div>
+<span class="flex-shrink mx-3 text-outline text-label-sm font-label-sm uppercase tracking-wider">Public Registry Access</span>
+<div class="flex-grow h-px bg-surface-variant"></div>
+</div>
+<!-- Secondary Action: Zero-Login Honey Jar Verifier -->
+<button class="w-full h-11 rounded-full bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-md text-label-md font-semibold transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+                  Quick Verify a Honey Jar without Login
+                </button>
+</div>
+</form>
+</div>
+<!-- Cryptographic Footer Trust Strip -->
+<div class="pt-6 mt-6 border-t border-surface-variant flex flex-wrap items-center justify-between gap-3 text-outline">
+<div class="flex items-center gap-2 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">lock</span>
+<span>256-Bit Encrypted</span>
+<span class="text-surface-variant">|</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<span>Aadhaar &amp; FSSAI Verified Gateway</span>
+</div>
+<div class="flex items-center gap-1.5 font-metric-mono text-metric-mono text-primary font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+              Mainnet Block #19,402,812
+            </div>
+</div>
+</div>
+</div>
+<!-- Bottom Grassroots Support & Verification Callout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">contact_phone</span>
+</div>
+<div>
+<h4 class="font-title-sm text-title-sm text-on-surface">Kisan Apiculture Helpline</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Toll-free voice assistance in 14 regional Indian languages: 1800-889-BEEF</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+<div>
+<h4 class="font-title-sm text-title-sm text-on-surface">Distributed Field Nodes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Offline caching enabled for remote forest &amp; mountain apiary telemetry uploads.</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div>
+<h4 class="font-title-sm text-title-sm text-on-surface">Zero-Adulteration Mandate</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Automated NMR spectrometer cross-match against SMR and C4 inverted sugar adulteration.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  (function() {
+    let selectedRoleKey = 'beekeeper';
+
+    const roleMap = {
+      'Rural Beekeeper (FPO Partner)': { key: 'beekeeper', phone: '98452 11048', node: 'IND-PROV-90', target: 'beekeeper-dashboard.html' },
+      'Processing Plant & Packaging Facility': { key: 'processor', phone: '98160 44210', node: 'PROC-HP-771', target: 'harvest-batch.html' },
+      'Accredited Testing Laboratory (NMR & Pollen)': { key: 'testing_lab', phone: '94180 88931', node: 'NABL-LAB-042', target: 'ai-health.html' },
+      'Government Regulatory & KVIC Field Auditor': { key: 'gov', phone: '98720 12345', node: 'KVIC-AUDIT-99', target: 'batch-traceability.html' },
+      'Consumer & Retail Verifier': { key: 'consumer', phone: '98200 99887', node: 'PUB-CONSUMER', target: 'consumer-qr.html' }
+    };
+
+    const roleCards = document.querySelectorAll('.role-card');
+    const currentRoleTitle = document.getElementById('currentRoleTitle');
+    const identifierInput = document.querySelector('input[placeholder*="10-digit"]');
+    const nodeBadge = document.querySelector('.lg\:col-span-7 .font-metric-mono') || document.querySelector('.font-metric-mono');
+
+    roleCards.forEach(card => {
+      card.addEventListener('click', () => {
+        roleCards.forEach(c => {
+          c.classList.remove('active', 'bg-surface-container-low', 'shadow-sm');
+          c.classList.add('bg-surface-container');
+          const icon = c.querySelector('.role-icon-box');
+          if (icon) {
+            icon.classList.remove('bg-primary-container', 'text-on-primary');
+            icon.classList.add('bg-surface-variant', 'text-on-surface');
+          }
+          const ind = c.querySelector('.role-indicator');
+          if (ind) {
+            ind.classList.remove('bg-primary');
+            ind.classList.add('bg-transparent');
+          }
+        });
+
+        card.classList.add('active', 'bg-surface-container-low', 'shadow-sm');
+        card.classList.remove('bg-surface-container');
+        const activeIcon = card.querySelector('.role-icon-box');
+        if (activeIcon) {
+          activeIcon.classList.add('bg-primary-container', 'text-on-primary');
+          activeIcon.classList.remove('bg-surface-variant', 'text-on-surface');
+        }
+        const activeInd = card.querySelector('.role-indicator');
+        if (activeInd) {
+          activeInd.classList.add('bg-primary');
+          activeInd.classList.remove('bg-transparent');
+        }
+
+        const roleAttr = card.getAttribute('data-role');
+        if (currentRoleTitle) {
+          currentRoleTitle.textContent = roleAttr;
+        }
+
+        const meta = roleMap[roleAttr] || roleMap['Rural Beekeeper (FPO Partner)'];
+        selectedRoleKey = meta.key;
+        if (identifierInput) {
+          identifierInput.value = meta.phone;
+        }
+        if (nodeBadge) {
+          nodeBadge.textContent = 'NODE: ' + meta.node;
+        }
+      });
+    });
+
+    // Auto-fill OTP
+    const autoFillBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Auto-Fill'));
+    const secretInput = document.getElementById('authSecretInput');
+    if (autoFillBtn && secretInput) {
+      autoFillBtn.addEventListener('click', () => {
+        secretInput.value = '';
+        let i = 0;
+        const code = '739 204';
+        const timer = setInterval(() => {
+          if (i < code.length) {
+            secretInput.value += code[i];
+            i++;
+          } else {
+            clearInterval(timer);
+            HoneyToast('OTP 739 204 auto-filled from SMS gateway', 'success');
+          }
+        }, 50);
+      });
+    }
+
+    // OTP / Password toggles
+    const toggleOtp = document.getElementById('toggleOtp');
+    const togglePass = document.getElementById('togglePass');
+    if (toggleOtp && togglePass && secretInput) {
+      toggleOtp.addEventListener('click', () => {
+        toggleOtp.classList.add('bg-primary', 'text-on-primary');
+        toggleOtp.classList.remove('text-on-surface-variant');
+        togglePass.classList.remove('bg-primary', 'text-on-primary');
+        togglePass.classList.add('text-on-surface-variant');
+        secretInput.placeholder = 'Enter 6-digit Verification OTP';
+        secretInput.value = '739 204';
+        secretInput.type = 'text';
+      });
+
+      togglePass.addEventListener('click', () => {
+        togglePass.classList.add('bg-primary', 'text-on-primary');
+        togglePass.classList.remove('text-on-surface-variant');
+        toggleOtp.classList.remove('bg-primary', 'text-on-primary');
+        toggleOtp.classList.add('text-on-surface-variant');
+        secretInput.placeholder = 'Enter secure terminal password';
+        secretInput.value = '••••••••••••';
+        secretInput.type = 'password';
+      });
+    }
+
+    // Resend OTP Countdown
+    const resendBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Resend OTP'));
+    if (resendBtn) {
+      let seconds = 42;
+      setInterval(() => {
+        if (seconds > 0) {
+          seconds--;
+          resendBtn.textContent = 'Resend OTP in 0:' + (seconds < 10 ? '0' : '') + seconds;
+        } else {
+          resendBtn.textContent = 'Resend OTP Now';
+          resendBtn.classList.add('underline');
+        }
+      }, 1000);
+
+      resendBtn.addEventListener('click', () => {
+        if (seconds <= 0) {
+          seconds = 45;
+          HoneyToast('New OTP sent to registered terminal', 'info');
+        }
+      });
+    }
+
+    // Quick Verify Button
+    const quickVerifyBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Quick Verify'));
+    if (quickVerifyBtn) {
+      quickVerifyBtn.addEventListener('click', () => {
+        window.location.href = 'consumer-qr.html';
+      });
+    }
+
+    // Submit Form / Access Portal
+    const authForm = document.querySelector('form');
+    if (authForm) {
+      authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = authForm.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span><span>Authenticating Node...</span>';
+        }
+
+        setTimeout(() => {
+          window.HoneyDataStore.setCurrentRole(selectedRoleKey);
+          const role = window.HoneyDataStore.getCurrentRole();
+          HoneyToast('Authenticated as ' + (role.title || role.userName) + '!', 'success');
+
+          setTimeout(() => {
+            window.location.href = role.target;
+          }, 400);
+        }, 600);
+      });
+    }
+  })();
+</script>
+</body></html>
