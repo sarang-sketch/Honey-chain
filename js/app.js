@@ -659,8 +659,8 @@
   };
 
   
-  // --- Mobile Sidebar Navigation Drawer ---
-  function initMobileNavigation() {
+    // --- Universal Responsive Sidebar Navigation (Mobile & Windows/Desktop) ---
+  function initSidebarNavigation() {
     let backdrop = document.getElementById('sidebar-backdrop');
     if (!backdrop) {
       backdrop = document.createElement('div');
@@ -675,26 +675,45 @@
     if (!sidebar.id) sidebar.id = 'app-sidebar';
     sidebar.classList.add('transition-transform', 'duration-300', 'ease-in-out');
 
-    // Dynamically inject mobile hamburger button if missing from header
-    const header = document.querySelector('header');
-    if (header && !document.getElementById('mobile-menu-btn')) {
-      const leftCol = header.querySelector('.flex.items-center:first-child');
-      if (leftCol) {
-        const menuBtn = document.createElement('button');
-        menuBtn.id = 'mobile-menu-btn';
-        menuBtn.className = 'lg:hidden p-2 -ml-1 text-on-surface hover:bg-surface-container rounded-lg flex items-center justify-center shrink-0';
-        menuBtn.setAttribute('aria-label', 'Open Navigation');
-        menuBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
-        leftCol.insertBefore(menuBtn, leftCol.firstChild);
-      }
+    const contentWrapper = document.getElementById('app-content-wrapper') || document.querySelector('.lg\\:pl-72, .pl-72');
+    if (contentWrapper) {
+      if (!contentWrapper.id) contentWrapper.id = 'app-content-wrapper';
+      contentWrapper.classList.add('transition-all', 'duration-300');
     }
 
-    // Dynamically inject close button in sidebar top header if missing
-    if (!document.getElementById('sidebar-close-btn')) {
+    const header = document.getElementById('app-header') || document.querySelector('header');
+    if (header) {
+      if (!header.id) header.id = 'app-header';
+      header.classList.add('transition-all', 'duration-300');
+    }
+
+    // Ensure menu toggle button exists and is visible for BOTH Windows desktop and mobile
+    let toggleBtn = document.getElementById('menu-toggle-btn') || document.getElementById('mobile-menu-btn');
+    if (!toggleBtn && header) {
+      const leftCol = header.querySelector('.flex.items-center:first-child');
+      if (leftCol) {
+        toggleBtn = document.createElement('button');
+        toggleBtn.id = 'menu-toggle-btn';
+        toggleBtn.className = 'p-2 -ml-1 text-on-surface hover:bg-surface-container rounded-lg flex items-center justify-center shrink-0 transition-colors cursor-pointer';
+        toggleBtn.setAttribute('aria-label', 'Toggle Navigation Panel');
+        toggleBtn.setAttribute('title', 'Toggle Navigation Panel (Alt+M)');
+        toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
+        leftCol.insertBefore(toggleBtn, leftCol.firstChild);
+      }
+    } else if (toggleBtn) {
+      toggleBtn.classList.remove('lg:hidden');
+      toggleBtn.id = 'menu-toggle-btn';
+      toggleBtn.setAttribute('title', 'Toggle Navigation Panel (Alt+M)');
+      toggleBtn.classList.add('cursor-pointer');
+    }
+
+    // Ensure sidebar has close button
+    let closeBtn = document.getElementById('sidebar-close-btn');
+    if (!closeBtn) {
       const topBar = sidebar.querySelector('.h-16');
       if (topBar) {
         topBar.classList.add('justify-between');
-        const closeBtn = document.createElement('button');
+        closeBtn = document.createElement('button');
         closeBtn.id = 'sidebar-close-btn';
         closeBtn.className = 'lg:hidden ml-auto p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors';
         closeBtn.setAttribute('aria-label', 'Close menu');
@@ -703,44 +722,148 @@
       }
     }
 
-    const openBtn = document.getElementById('mobile-menu-btn');
-    const closeBtn = document.getElementById('sidebar-close-btn');
+    const isMobile = () => window.innerWidth < 1024;
 
-    function openSidebar() {
-      sidebar.classList.remove('-translate-x-full');
-      sidebar.classList.add('translate-x-0');
-      backdrop.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
-      });
-      document.body.style.overflow = 'hidden';
-    }
+    // Mobile: starts CLOSED by default so layout is clean and never messed up
+    // Desktop: starts OPEN by default, or follows stored preference
+    let mobileOpen = false;
+    let desktopOpen = true;
 
-    function closeSidebar() {
-      sidebar.classList.remove('translate-x-0');
-      sidebar.classList.add('-translate-x-full');
-      backdrop.classList.remove('opacity-100');
-      backdrop.classList.add('opacity-0');
-      setTimeout(() => {
+    try {
+      const saved = localStorage.getItem('honeychain_sidebar_desktop_open');
+      if (saved !== null) desktopOpen = saved === 'true';
+    } catch (e) {}
+
+    function updateView() {
+      if (isMobile()) {
+        // --- MOBILE MODE ---
+        if (contentWrapper) {
+          contentWrapper.style.paddingLeft = '0px';
+        }
+        if (header) {
+          header.style.left = '0px';
+        }
+
+        if (mobileOpen) {
+          sidebar.classList.remove('-translate-x-full');
+          sidebar.classList.add('translate-x-0');
+          sidebar.style.transform = 'translateX(0)';
+          backdrop.classList.remove('hidden');
+          requestAnimationFrame(() => {
+            backdrop.classList.remove('opacity-0');
+            backdrop.classList.add('opacity-100');
+          });
+          document.body.style.overflow = 'hidden';
+          if (toggleBtn) {
+            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu_open</span>';
+          }
+        } else {
+          sidebar.classList.remove('translate-x-0');
+          sidebar.classList.add('-translate-x-full');
+          sidebar.style.transform = 'translateX(-100%)';
+          backdrop.classList.remove('opacity-100');
+          backdrop.classList.add('opacity-0');
+          setTimeout(() => {
+            if (!mobileOpen) {
+              backdrop.classList.add('hidden');
+              document.body.style.overflow = '';
+            }
+          }, 300);
+          if (toggleBtn) {
+            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
+          }
+        }
+      } else {
+        // --- WINDOWS / DESKTOP MODE ---
         backdrop.classList.add('hidden');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
         document.body.style.overflow = '';
-      }, 300);
+
+        if (desktopOpen) {
+          sidebar.classList.remove('-translate-x-full');
+          sidebar.classList.add('translate-x-0');
+          sidebar.style.transform = 'translateX(0)';
+          if (contentWrapper) contentWrapper.style.paddingLeft = '18rem';
+          if (header) header.style.left = '18rem';
+          if (toggleBtn) {
+            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu_open</span>';
+          }
+        } else {
+          sidebar.classList.remove('translate-x-0');
+          sidebar.classList.add('-translate-x-full');
+          sidebar.style.transform = 'translateX(-100%)';
+          if (contentWrapper) contentWrapper.style.paddingLeft = '0px';
+          if (header) header.style.left = '0px';
+          if (toggleBtn) {
+            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
+          }
+        }
+      }
     }
 
-    if (openBtn) openBtn.addEventListener('click', openSidebar);
-    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
-    backdrop.addEventListener('click', closeSidebar);
+    function toggle() {
+      if (isMobile()) {
+        mobileOpen = !mobileOpen;
+        updateView();
+      } else {
+        desktopOpen = !desktopOpen;
+        try {
+          localStorage.setItem('honeychain_sidebar_desktop_open', desktopOpen.toString());
+        } catch (e) {}
+        updateView();
+      }
+    }
+
+    function closeMobile() {
+      if (isMobile() && mobileOpen) {
+        mobileOpen = false;
+        updateView();
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggle();
+      };
+    }
+
+    if (closeBtn) {
+      closeBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeMobile();
+      };
+    }
+
+    backdrop.onclick = () => {
+      closeMobile();
+    };
 
     sidebar.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth < 1024) closeSidebar();
+        if (isMobile()) {
+          closeMobile();
+        }
       });
     });
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024) closeSidebar();
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobile();
+      } else if (e.altKey && (e.key === 'm' || e.key === 'M')) {
+        e.preventDefault();
+        toggle();
+      }
     });
+
+    window.addEventListener('resize', () => {
+      updateView();
+    });
+
+    updateView();
   }
 
     // --- Floating Screen Switcher HUD for Easy Evaluation ---
@@ -820,7 +943,7 @@
 
   // --- Initialize on DOMContentLoaded ---
   document.addEventListener('DOMContentLoaded', () => {
-    initMobileNavigation();
+    initSidebarNavigation();
     initNavigation();
     initHeaderUser();
     injectSharedModals();
