@@ -659,13 +659,13 @@
   };
 
   
-    // --- Universal Responsive Sidebar Navigation (Mobile & Windows/Desktop) ---
+      // --- Universal Responsive Sidebar Navigation (Open ONLY on user click) ---
   function initSidebarNavigation() {
     let backdrop = document.getElementById('sidebar-backdrop');
     if (!backdrop) {
       backdrop = document.createElement('div');
       backdrop.id = 'sidebar-backdrop';
-      backdrop.className = 'fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden transition-opacity duration-300 opacity-0';
+      backdrop.className = 'fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden transition-opacity duration-300 opacity-0 cursor-pointer';
       document.body.appendChild(backdrop);
     }
 
@@ -675,19 +675,21 @@
     if (!sidebar.id) sidebar.id = 'app-sidebar';
     sidebar.classList.add('transition-transform', 'duration-300', 'ease-in-out');
 
-    const contentWrapper = document.getElementById('app-content-wrapper') || document.querySelector('.lg\\:pl-72, .pl-72');
+    const contentWrapper = document.getElementById('app-content-wrapper') || document.querySelector('#app-content-wrapper, .lg\\:pl-72, .pl-72');
     if (contentWrapper) {
       if (!contentWrapper.id) contentWrapper.id = 'app-content-wrapper';
-      contentWrapper.classList.add('transition-all', 'duration-300');
+      contentWrapper.classList.remove('lg:pl-72', 'pl-72');
+      contentWrapper.style.paddingLeft = '0px';
     }
 
     const header = document.getElementById('app-header') || document.querySelector('header');
     if (header) {
       if (!header.id) header.id = 'app-header';
-      header.classList.add('transition-all', 'duration-300');
+      header.classList.remove('lg:left-72', 'left-72');
+      header.style.left = '0px';
     }
 
-    // Ensure menu toggle button exists and is visible for BOTH Windows desktop and mobile
+    // Ensure menu toggle button exists in header
     let toggleBtn = document.getElementById('menu-toggle-btn') || document.getElementById('mobile-menu-btn');
     if (!toggleBtn && header) {
       const leftCol = header.querySelector('.flex.items-center:first-child');
@@ -715,110 +717,61 @@
         topBar.classList.add('justify-between');
         closeBtn = document.createElement('button');
         closeBtn.id = 'sidebar-close-btn';
-        closeBtn.className = 'lg:hidden ml-auto p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors';
+        closeBtn.className = 'ml-auto p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors cursor-pointer';
         closeBtn.setAttribute('aria-label', 'Close menu');
         closeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
         topBar.appendChild(closeBtn);
       }
     }
 
-    const isMobile = () => window.innerWidth < 1024;
+    // THE TOGGLE BAR IS NOT ALREADY PRESENT BY DEFAULT.
+    // It opens ONLY after the user clicks the button.
+    let isOpen = false;
 
-    // Mobile: starts CLOSED by default so layout is clean and never messed up
-    // Desktop: starts OPEN by default, or follows stored preference
-    let mobileOpen = false;
-    let desktopOpen = true;
+    // Ensure sidebar starts off-screen
+    sidebar.classList.remove('lg:translate-x-0', 'translate-x-0');
+    sidebar.classList.add('-translate-x-full');
+    sidebar.style.transform = 'translateX(-100%)';
 
-    try {
-      const saved = localStorage.getItem('honeychain_sidebar_desktop_open');
-      if (saved !== null) desktopOpen = saved === 'true';
-    } catch (e) {}
+    function openSidebar() {
+      isOpen = true;
+      sidebar.classList.remove('-translate-x-full');
+      sidebar.classList.add('translate-x-0');
+      sidebar.style.transform = 'translateX(0)';
+      backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+      });
+      document.body.style.overflow = 'hidden';
+      if (toggleBtn) {
+        toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu_open</span>';
+      }
+    }
 
-    function updateView() {
-      if (isMobile()) {
-        // --- MOBILE MODE ---
-        if (contentWrapper) {
-          contentWrapper.style.paddingLeft = '0px';
+    function closeSidebar() {
+      isOpen = false;
+      sidebar.classList.remove('translate-x-0');
+      sidebar.classList.add('-translate-x-full');
+      sidebar.style.transform = 'translateX(-100%)';
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        if (!isOpen) {
+          backdrop.classList.add('hidden');
+          document.body.style.overflow = '';
         }
-        if (header) {
-          header.style.left = '0px';
-        }
-
-        if (mobileOpen) {
-          sidebar.classList.remove('-translate-x-full');
-          sidebar.classList.add('translate-x-0');
-          sidebar.style.transform = 'translateX(0)';
-          backdrop.classList.remove('hidden');
-          requestAnimationFrame(() => {
-            backdrop.classList.remove('opacity-0');
-            backdrop.classList.add('opacity-100');
-          });
-          document.body.style.overflow = 'hidden';
-          if (toggleBtn) {
-            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu_open</span>';
-          }
-        } else {
-          sidebar.classList.remove('translate-x-0');
-          sidebar.classList.add('-translate-x-full');
-          sidebar.style.transform = 'translateX(-100%)';
-          backdrop.classList.remove('opacity-100');
-          backdrop.classList.add('opacity-0');
-          setTimeout(() => {
-            if (!mobileOpen) {
-              backdrop.classList.add('hidden');
-              document.body.style.overflow = '';
-            }
-          }, 300);
-          if (toggleBtn) {
-            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
-          }
-        }
-      } else {
-        // --- WINDOWS / DESKTOP MODE ---
-        backdrop.classList.add('hidden');
-        backdrop.classList.remove('opacity-100');
-        backdrop.classList.add('opacity-0');
-        document.body.style.overflow = '';
-
-        if (desktopOpen) {
-          sidebar.classList.remove('-translate-x-full');
-          sidebar.classList.add('translate-x-0');
-          sidebar.style.transform = 'translateX(0)';
-          if (contentWrapper) contentWrapper.style.paddingLeft = '18rem';
-          if (header) header.style.left = '18rem';
-          if (toggleBtn) {
-            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu_open</span>';
-          }
-        } else {
-          sidebar.classList.remove('translate-x-0');
-          sidebar.classList.add('-translate-x-full');
-          sidebar.style.transform = 'translateX(-100%)';
-          if (contentWrapper) contentWrapper.style.paddingLeft = '0px';
-          if (header) header.style.left = '0px';
-          if (toggleBtn) {
-            toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
-          }
-        }
+      }, 300);
+      if (toggleBtn) {
+        toggleBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">menu</span>';
       }
     }
 
     function toggle() {
-      if (isMobile()) {
-        mobileOpen = !mobileOpen;
-        updateView();
+      if (isOpen) {
+        closeSidebar();
       } else {
-        desktopOpen = !desktopOpen;
-        try {
-          localStorage.setItem('honeychain_sidebar_desktop_open', desktopOpen.toString());
-        } catch (e) {}
-        updateView();
-      }
-    }
-
-    function closeMobile() {
-      if (isMobile() && mobileOpen) {
-        mobileOpen = false;
-        updateView();
+        openSidebar();
       }
     }
 
@@ -834,39 +787,33 @@
       closeBtn.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        closeMobile();
+        closeSidebar();
       };
     }
 
     backdrop.onclick = () => {
-      closeMobile();
+      closeSidebar();
     };
 
+    // Close when clicking any navigation link
     sidebar.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        if (isMobile()) {
-          closeMobile();
-        }
+        closeSidebar();
       });
     });
 
+    // Keyboard shortcuts: ESC to close, Alt+M to toggle
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeMobile();
+      if (e.key === 'Escape' && isOpen) {
+        closeSidebar();
       } else if (e.altKey && (e.key === 'm' || e.key === 'M')) {
         e.preventDefault();
         toggle();
       }
     });
-
-    window.addEventListener('resize', () => {
-      updateView();
-    });
-
-    updateView();
   }
 
-    // --- Floating Screen Switcher HUD for Easy Evaluation ---
+  // --- Floating Screen Switcher HUD for Easy Evaluation ---
   function injectScreenSwitcherHUD() {
     if (document.getElementById('honey-screen-hud')) return;
 
@@ -889,7 +836,7 @@
 
     let html = `
       <!-- Expanded State -->
-      <div id="hud-expanded-bar" class="bg-[#121c2a]/95 text-white backdrop-blur-md px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-1 text-[11px] sm:text-xs font-medium">
+      <div id="hud-expanded-bar" class="hidden bg-[#121c2a]/95 text-white backdrop-blur-md px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-1 text-[11px] sm:text-xs font-medium">
         <div class="flex items-center gap-1 pr-1.5 sm:pr-2 border-r border-white/20 shrink-0">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="font-bold text-emerald-300 hidden sm:inline">HoneyChain</span>
@@ -914,7 +861,7 @@
       </div>
 
       <!-- Collapsed State -->
-      <button id="hud-expand-btn" class="hidden bg-[#121c2a]/95 text-white backdrop-blur-md px-3 py-1.5 rounded-full shadow-2xl border border-white/10 flex items-center gap-1.5 text-xs font-medium hover:bg-[#1b2a3f] transition-all">
+      <button id="hud-expand-btn" class="bg-[#121c2a]/95 text-white backdrop-blur-md px-3 py-1.5 rounded-full shadow-2xl border border-white/10 flex items-center gap-1.5 text-xs font-medium hover:bg-[#1b2a3f] transition-all">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         <span class="font-bold text-emerald-300">Screens (8)</span>
         <span class="material-symbols-outlined text-[16px]">expand_less</span>
